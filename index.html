@@ -1,0 +1,184 @@
+<!--
+  Ділення стовпчиком — тренажер — v1.0 (30.09.2026)
+  Окремий проєкт, не пов'язаний з «Навчальним годинником».
+-->
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ділення стовпчиком — тренажер для дітей</title>
+<meta name="description" content="Безкоштовний інтерактивний тренажер ділення в стовпчик для дітей: покрокове вгадування цифри частки, множення і віднімання з підказками. Працює офлайн.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Anatolii Bondarenko">
+<meta name="version" content="1.0">
+<!-- ЗАМІНІТЬ на реальну адресу після створення сторінки на GitHub Pages -->
+<link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
+
+<!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ділення стовпчиком — тренажер для дітей">
+<meta property="og:description" content="Безкоштовний інтерактивний тренажер ділення в стовпчик для дітей: покрокове вгадування цифри частки, множення і віднімання з підказками.">
+<meta property="og:image" content="https://mranoven-coder.github.io/dilennya/icons/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://mranoven-coder.github.io/dilennya/">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:site_name" content="Ділення стовпчиком">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ділення стовпчиком — тренажер для дітей">
+<meta name="twitter:description" content="Покрокове ділення в стовпчик із підказками — безкоштовно, офлайн.">
+<meta name="twitter:image" content="https://mranoven-coder.github.io/dilennya/icons/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ділення стовпчиком — тренажер",
+  "url": "https://mranoven-coder.github.io/dilennya/",
+  "description": "Безкоштовний інтерактивний тренажер ділення в стовпчик для дітей.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": ["uk"],
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
+  "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
+  "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
+  "softwareVersion": "1.0"
+}
+</script>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4a7fd6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ділення">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<style>
+:root{--bg:#eef4ff;--card:#fff;--tx:#1d2a44;--mu:#5b6b8c;--pr:#4a7fd6;--ok:#2e9e5b;--er:#d64a4a;--or:#f08a1c;--hl:#fff1d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a2a;--card:#1f2740;--tx:#eaf0ff;--mu:#9fb0d3;--hl:#3a3320}}
+:root[data-theme="dark"]{--bg:#141a2a;--card:#1f2740;--tx:#eaf0ff;--mu:#9fb0d3;--hl:#3a3320}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;padding:16px}
+main{width:100%;max-width:560px}
+h1{font-size:1.5rem;text-align:center;margin:4px 0 12px}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px #0002}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+select,input,button{font:inherit;padding:8px 12px;border-radius:10px;border:2px solid var(--pr);background:var(--card);color:var(--tx)}
+button{background:var(--pr);color:#fff;border:0;cursor:pointer;font-weight:600}
+button.g{background:var(--mu)}
+input.n{width:5.5em;text-align:center}
+#board{display:flex;justify-content:center;overflow-x:auto}
+pre{font:700 2.1rem/1.15 ui-monospace,Menlo,Consolas,monospace;margin:0}
+.wrap{display:flex;align-items:flex-start}
+.dv{margin-left:4px;min-width:5ch}.bd{display:block;border-left:3px solid var(--tx);border-bottom:3px solid var(--tx);padding-left:12px}.ul{border-bottom:3px solid var(--tx)}
+.dv .q{color:var(--ok);border-left:3px solid var(--tx);padding-left:12px;min-height:1.15em}
+.hl{background:var(--hl);border-radius:4px}.dn{color:var(--or)}.pd{color:var(--pr)}.qq{color:var(--mu)}
+#msg{font-size:1.2rem;text-align:center;min-height:3.2em;margin:4px 0 10px}
+#msg.ok{color:var(--ok)}#msg.er{color:var(--er)}
+#ans{font-size:1.6rem;width:6em;text-align:center}
+.shake{animation:s .3s}@keyframes s{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+small{color:var(--mu)}
+</style></head><body><main>
+<h1>➗ Ділення стовпчиком</h1>
+<div class="card"><div class="row">
+<select id="lvl"><option value="0">2 цифри ÷ 1 цифру</option><option value="1" selected>3 цифри ÷ 1 цифру</option><option value="2">4 цифри ÷ 1 цифру</option><option value="3">3–4 цифри ÷ 2 цифри</option></select>
+<label><input type="checkbox" id="rm"> з остачею</label>
+<button id="new">🎲 Нове завдання</button></div>
+<div class="row" style="margin-top:10px"><small>Своє:</small><input class="n" id="a" inputmode="numeric" placeholder="ділене"><b>:</b><input class="n" id="b" inputmode="numeric" placeholder="дільник"><button class="g" id="own">Почати</button></div></div>
+<div class="card"><div id="board"></div></div>
+<div class="card"><div id="msg"></div>
+<div class="row"><input id="ans" inputmode="numeric" autocomplete="off"><button id="ok">Перевірити</button></div>
+<div class="row" style="margin-top:10px"><button class="g" id="hint">💡 Підказка</button><button class="g" id="show">👀 Показати відповідь</button></div></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let A,B,S,k,ph,mist,done,hintOn;
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+let A0,D0;
+function newTask(){let t=0;do{gen()}while(Math.floor(A0/D0)<10&&++t<300);start(A0,D0)}
+function gen(){
+ const l=+$('lvl').value,r=$('rm').checked;let d,a;
+ if(l<3){d=R(2,9);const len=l+2,lo=Math.pow(10,len-1),hi=Math.pow(10,len)-1;
+  if(r)a=R(lo,hi);else{a=d*R(Math.ceil(lo/d),Math.floor(hi/d))}}
+ else{d=R(11,29);const lo=200,hi=9999;if(r)a=R(lo,hi);else a=d*R(Math.ceil(lo/d),Math.floor(hi/d))}
+ A0=a;D0=d}
+function start(a,d){
+ if(!(a>0&&d>1&&Number.isInteger(a)&&Number.isInteger(d))||String(a).length>7||Math.floor(a/d)<10){$('msg').textContent='Введи приклад, де частка матиме щонайменше 2 цифри (дільник від 2, ділене до 7 цифр, помітно більше за дільник).';return}
+ A=a;B=d;const ds=String(a);let n=1,cur=+ds[0];
+ while(cur<d&&n<ds.length){cur=cur*10+ +ds[n];n++}
+ S=[];
+ for(;;){const q=Math.floor(cur/d);S.push({cur,n,q,p:q*d,r:cur%d});
+  if(n>=ds.length)break;cur=(cur%d)*10+ +ds[n];n++}
+ k=0;ph=0;mist=0;done=false;hintOn=false;$('a').value=A;$('b').value=B;draw();ask()}
+function pad(s,end,extra=0){return ' '.repeat(Math.max(0,end+1-s.length+extra))+s}
+function draw(){
+ const ds=String(A),cs=S[Math.min(k,S.length-1)];
+ let hi=cs.n,from=hi-String(cs.cur).length;
+ if(k>0&&!done){from=0;}
+ let top=' '+[...ds].map((c,i)=>{
+  const cls=(!done&&i<hi&&i>=(k==0?0:hi-1))?(k==0?'hl':'dn'):'';return cls?`<span class="${cls}">${c}</span>`:c}).join('');
+ let rows=[top];
+ const upto=done?S.length:k;
+ for(let i=0;i<=Math.min(upto,S.length-1);i++){
+  const s=S[i],e=s.n-1;
+  if(i>0){const c=String(s.cur),ln=pad(c.slice(0,-1),e)+`<span class="dn">${c.slice(-1)}</span>`;
+   if(S[i-1].q===0&&i-1>0)rows[rows.length-1]=ln;else rows.push(ln)}
+  const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
+  if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
+ }
+ if(done){const s=S[S.length-1],ln='<span style="color:var(--ok)">'+pad(String(s.r),s.n-1,1)+'</span>';
+  if(s.q===0&&S.length>1)rows[rows.length-1]=ln;else rows.push(ln)}
+ let q='';for(let i=0;i<S.length;i++){q+=(i<k||done||(i==k&&ph>=1))?S[i].q:'<span class="qq">·</span>'}
+ $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd">${B}</span><div class="q">${q}</div></pre></div>`}
+function ask(){
+ const s=S[k],m=$('msg');m.className='';
+ const t=[`Скільки разів ${B} вміщується в ${s.cur}? (Яка цифра в частці?)`,
+  `Перемнож: ${s.q} × ${B} = ?`,`Віднімемо: ${s.cur} − ${s.p} = ?`][ph];
+ m.textContent=(k>0&&ph==0?`Зносимо цифру ${String(s.cur).slice(-1)}. `:'')+t;
+ $('ans').value='';$('ans').focus()}
+function hint(){
+ const s=S[k];let h='';
+ if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
+ else if(ph==1)h=`Рахуй по частинах: ${B} × ${s.q}.`;
+ else h=`Пиши число під числом і віднімай: ${s.cur} − ${s.p}. Остача має бути менша за ${B}.`;
+ $('msg').className='';$('msg').textContent='💡 '+h}
+function correct(){return [S[k].q,S[k].p,S[k].r][ph]}
+function check(){
+ if(done)return;const v=$('ans').value.trim();if(v==='')return;const g=+v,s=S[k],m=$('msg');
+ if(g===correct()){
+  m.className='ok';
+  if(ph==0&&s.q===0){if(k==S.length-1){finish();return}
+   k++;ph=0;draw();ask();m.className='ok';m.textContent='✅ Пишемо 0 у частку — віднімати нічого не треба. '+m.textContent;return}
+  if(ph<2){ph++;draw();ask();m.className='ok';m.textContent='✅ Правильно! '+m.textContent}
+  else{if(k==S.length-1){finish()}else{k++;ph=0;draw();ask();m.className='ok';m.textContent='✅ '+m.textContent}}
+  draw()}
+ else{mist++;m.className='er';let t='❌ Ще раз.';
+  if(ph==0)t+=g*B>s.cur?` ${g}×${B}=${g*B} — це більше за ${s.cur}, бери менше.`:` ${g}×${B}=${g*B}, залишиться забагато (≥ ${B}) — бери більше.`;
+  m.textContent=t;$('ans').classList.remove('shake');void $('ans').offsetWidth;$('ans').classList.add('shake');$('ans').select()}}
+function finish(){
+ done=true;draw();const s=S[S.length-1],st=mist==0?'⭐⭐⭐':mist<=2?'⭐⭐':'⭐';
+ const q=S.map(x=>x.q).join('').replace(/^0+(?=\d)/,'');
+ $('msg').className='ok';
+ $('msg').innerHTML=`🎉 Готово! ${A} : ${B} = ${q}${s.r?` (остача ${s.r})`:''}<br>Перевірка: ${q} × ${B}${s.r?' + '+s.r:''} = ${+q*B+s.r} ${st}`}
+$('ok').onclick=check;$('ans').onkeydown=e=>{if(e.key==='Enter')check()};
+$('hint').onclick=()=>!done&&hint();
+$('show').onclick=()=>{if(done)return;mist++;$('ans').value=correct();check()};
+$('new').onclick=newTask;
+$('own').onclick=()=>start(+$('a').value,+$('b').value);
+$('a').onkeydown=$('b').onkeydown=e=>{if(e.key==='Enter')$('own').click()};
+newTask();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(err){
+      console.log('Service worker не зареєстровано:', err);
+    });
+  });
+}
+</script></body></html>
