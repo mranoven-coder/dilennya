@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.0 (30.09.2026)
+  Ділення стовпчиком — тренажер — v1.1 (30.09.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний інтерактивний тренажер ділення в стовпчик для дітей: покрокове вгадування цифри частки, множення і віднімання з підказками. Працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.0">
+<meta name="version" content="1.1">
 <!-- ЗАМІНІТЬ на реальну адресу після створення сторінки на GitHub Pages -->
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.0"
+  "softwareVersion": "1.1"
 }
 </script>
 
@@ -74,7 +74,7 @@ button{background:var(--pr);color:#fff;border:0;cursor:pointer;font-weight:600}
 button.g{background:var(--mu)}
 input.n{width:5.5em;text-align:center}
 #board{display:flex;justify-content:center;overflow-x:auto}
-pre{font:700 2.1rem/1.15 ui-monospace,Menlo,Consolas,monospace;margin:0}
+pre{font:700 calc(2.1rem*var(--board-scale,1))/1.15 ui-monospace,Menlo,Consolas,monospace;margin:0}
 .wrap{display:flex;align-items:flex-start}
 .dv{margin-left:4px;min-width:5ch}.bd{display:block;border-left:3px solid var(--tx);border-bottom:3px solid var(--tx);padding-left:12px}.ul{border-bottom:3px solid var(--tx)}
 .dv .q{color:var(--ok);border-left:3px solid var(--tx);padding-left:12px;min-height:1.15em}
@@ -84,8 +84,58 @@ pre{font:700 2.1rem/1.15 ui-monospace,Menlo,Consolas,monospace;margin:0}
 #ans{font-size:1.6rem;width:6em;text-align:center}
 .shake{animation:s .3s}@keyframes s{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 small{color:var(--mu)}
+
+.version-badge{display:inline-block;margin-left:6px;padding:2px 10px;font-size:0.75rem;font-weight:600;color:var(--mu);background:var(--card);border:1px solid var(--pr);border-radius:999px;cursor:pointer;vertical-align:middle}
+.top-actions,.bottom-actions{margin:10px 0}
+.donate-btn{background:linear-gradient(135deg,#ff6a88,#ff4757)}
+.invite-btn{background:var(--pr)}
+.gear-btn{width:42px;height:42px;padding:0;border-radius:50%;flex:none;background:var(--card);color:var(--pr)}
+.help-btn{background:var(--or)}
+.changes-btn{background:var(--ok);position:relative}
+.changes-btn.has-new::after{content:'NEW';position:absolute;top:-8px;right:-8px;background:var(--er);color:#fff;font-size:0.6rem;font-weight:700;padding:2px 6px;border-radius:999px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.wish-btn{background:#8e5bd0;color:#fff;text-decoration:none;display:inline-flex;align-items:center;padding:8px 12px;border-radius:10px;font-weight:600}
+
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(16px);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:0.9rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.about{max-width:560px;margin:20px auto 0;padding:0 4px;color:var(--mu);font-size:0.9rem;line-height:1.5}
+.about h2{font-size:1rem;color:var(--pr);margin:0 0 6px}
+.about h3{font-size:0.92rem;color:var(--tx);margin:12px 0 2px}
+.about p{margin:0 0 6px}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(10,15,30,.55);z-index:100;padding:20px;overflow-y:auto}
+.overlay.open{display:block}
+.modal{background:var(--card);color:var(--tx);max-width:520px;margin:0 auto 40px;border-radius:16px;padding:22px 22px 28px;box-shadow:0 10px 30px rgba(0,0,0,.3);position:relative}
+.modal-close{position:sticky;top:0;float:right;background:var(--er);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:1.1rem;cursor:pointer;line-height:1}
+.modal h2{color:var(--pr);margin:4px 0 10px;font-size:1.25rem}
+.modal h3{color:var(--or);margin:16px 0 4px;font-size:1rem}
+.modal p,.modal li{font-size:0.92rem;line-height:1.5}
+.modal ol,.modal ul{padding-left:20px;margin:6px 0 10px}
+.modal hr{border:none;border-top:1px dashed var(--mu);margin:16px 0;opacity:.4}
+
+.donate-links{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.donate-links a{display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:12px;color:#fff;text-decoration:none;font-weight:700}
+.dl-mono{background:linear-gradient(135deg,#000a3d,#1a2b6d)}
+.dl-bmc{background:#ffdd00;color:#222}
+.dl-kofi{background:#ff5f5f}
+
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 4px;cursor:pointer}
+.settings-row input{width:22px;height:22px;flex:none;accent-color:var(--pr)}
+.settings-note{color:var(--mu);font-size:0.82rem;margin:4px 0 12px}
+.size-options{display:flex;gap:8px;margin:6px 0}
+.size-btn{flex:1;padding:8px 4px;font-size:0.9rem;background:var(--card);color:var(--pr);border:2px solid var(--pr)}
+.size-btn.active{background:var(--pr);color:#fff}
+[hidden]{display:none !important}
 </style></head><body><main>
-<h1>➗ Ділення стовпчиком</h1>
+<h1>➗ Ділення стовпчиком <button type="button" class="version-badge" id="versionBadge">v1.1</button></h1>
+
+<div class="row top-actions">
+<button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
+<button type="button" class="invite-btn" id="inviteBtn">📤 Поділитися</button>
+<button type="button" class="gear-btn" id="gearBtn" aria-label="Налаштування" title="Налаштування">⚙</button>
+</div>
+<div class="toast" id="toast">Посилання скопійовано!</div>
+
 <div class="card"><div class="row">
 <select id="lvl"><option value="0">2 цифри ÷ 1 цифру</option><option value="1" selected>3 цифри ÷ 1 цифру</option><option value="2">4 цифри ÷ 1 цифру</option><option value="3">3–4 цифри ÷ 2 цифри</option></select>
 <label><input type="checkbox" id="rm"> з остачею</label>
@@ -95,7 +145,121 @@ small{color:var(--mu)}
 <div class="card"><div id="msg"></div>
 <div class="row"><input id="ans" inputmode="numeric" autocomplete="off"><button id="ok">Перевірити</button></div>
 <div class="row" style="margin-top:10px"><button class="g" id="hint">💡 Підказка</button><button class="g" id="show">👀 Показати відповідь</button></div></div>
+
+<div class="row bottom-actions">
+<button type="button" class="help-btn" id="helpBtn">📖 Інструкція</button>
+<button type="button" class="changes-btn" id="changesBtn">🆕 Що нового</button>
+<a class="wish-btn" href="https://forms.gle/qZnaLWpMNniaP8PV9" target="_blank" rel="noopener noreferrer">💌 Залишити побажання</a>
+</div>
+
+<section class="about">
+  <h2>Про тренажер</h2>
+  <p>«Ділення стовпчиком» — безкоштовний інтерактивний тренажер, який допомагає дітям навчитися ділити багатоцифрові числа. Дитина проходить кожен крок сама: вгадує цифру частки з підказками «забагато» / «замало», множить і віднімає — так само, як у зошиті. Працює в браузері та офлайн, без реєстрації.</p>
+  <h3>Як навчити дитину ділити стовпчиком?</h3>
+  <p>Почніть з рівня «2 цифри ÷ 1 цифру» без остачі — це найпростіші приклади. Коли дитина впевнено з ними впорається, переходьте до довших чисел, а потім додайте галочку «з остачею». Підказка (💡) допомагає пригадати таблицю множення, а кнопка «Показати відповідь» (👀) — аварійний вихід, якщо приклад не йде; за бажанням її можна вимкнути в налаштуваннях (⚙).</p>
+  <h3>Для якого віку цей тренажер?</h3>
+  <p>Орієнтовно для дітей 7–11 років, які вже знають таблицю множення та вчаться ділити багатоцифрові числа.</p>
+  <h3>Чи потрібен інтернет?</h3>
+  <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.1 · 30.09.2026</p>
+</section>
 </main>
+
+<div class="overlay" id="tipsOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="tipsClose" type="button" aria-label="Закрити">✕</button>
+    <h2>Як користуватись тренажером</h2>
+    <ol>
+      <li>Обери рівень складності або введи своє ділене й дільник.</li>
+      <li>Вгадай цифру частки — якщо не підходить, тренажер підкаже «забагато» чи «замало».</li>
+      <li>Помнож і відніми — так само крок за кроком, поки приклад не буде розв'язано.</li>
+      <li>💡 «Підказка» — безкоштовна допомога; 👀 «Показати відповідь» — готова відповідь (зі штрафом до зірочок).</li>
+      <li>⚙ — тут можна вимкнути ці підказки, збільшити цифри або заборонити кнопку «Показати відповідь».</li>
+    </ol>
+    <p class="settings-note">Тапни будь-де, щоб закрити.</p>
+  </div>
+</div>
+
+<div class="overlay" id="helpOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="helpClose" type="button" aria-label="Закрити">✕</button>
+    <h2>Ділення стовпчиком — посібник для батьків і вчителів</h2>
+    <p class="settings-note">Для кого: діти, які вчаться ділити багатоцифрові числа (орієнтовно 7–11 років)</p>
+    <h3>1. Що це таке</h3>
+    <p>Тренажер показує класичний запис ділення стовпчиком: дільник над рискою, частка під нею. Дитина сама вгадує кожну цифру частки, множить і віднімає — програма перевіряє кожен крок і підказує напрямок помилки, а не просто показує готову відповідь.</p>
+    <h3>2. Елементи екрана</h3>
+    <ul>
+      <li><b>Рівень складності</b> — від «2 цифри ÷ 1 цифру» до «3–4 цифри ÷ 2 цифри».</li>
+      <li><b>З остачею</b> — галочка вмикає приклади з остачею; без неї числа завжди діляться рівно.</li>
+      <li><b>Нове завдання</b> — генерує випадковий приклад обраної складності.</li>
+      <li><b>Своє</b> — можна ввести власне ділене й дільник.</li>
+      <li><b>💡 Підказка</b> — підказує без штрафу (таблиця множення, порада щодо множення чи віднімання).</li>
+      <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки. Цю кнопку можна вимкнути в ⚙.</li>
+      <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь».</li>
+    </ul>
+    <h3>3. Як користуватись покроково</h3>
+    <p><b>Крок 1.</b> Оберіть найпростіший рівень («2 цифри ÷ 1 цифру») без остачі.</p>
+    <p><b>Крок 2.</b> Коли дитина впевнено вгадує цифру частки й множить — додайте остачу.</p>
+    <p><b>Крок 3.</b> Поступово переходьте до довших чисел і дільника з двох цифр.</p>
+    <p><b>Крок 4.</b> Якщо дитина застрягла — спершу запропонуйте 💡, а 👀 лишіть на крайній випадок.</p>
+    <h3>4. Технічні примітки</h3>
+    <ul>
+      <li>Працює в будь-якому сучасному браузері на комп'ютері, планшеті й телефоні.</li>
+      <li>Після першого відкриття працює навіть без інтернету; можна встановити як застосунок.</li>
+      <li>Поруч із заголовком — мітка версії: дотик відкриває «Що нового».</li>
+    </ul>
+    <hr>
+    <p class="settings-note" style="text-align:center">Автор ідеї та вимог: Anatolii Bondarenko</p>
+  </div>
+</div>
+
+<div class="overlay" id="changesOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="changesClose" type="button" aria-label="Закрити">✕</button>
+    <h2>Що нового</h2>
+    <div id="releasesBox"></div>
+    <hr>
+    <p class="settings-note" style="text-align:center">Є ідея? Натисніть «Залишити побажання» — ми читаємо кожне.</p>
+  </div>
+</div>
+
+<div class="overlay" id="donateOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="donateClose" type="button" aria-label="Закрити">✕</button>
+    <h2>Як підтримати проєкт</h2>
+    <p>Оберіть зручний спосіб — дякуємо за будь-яку підтримку!</p>
+    <div class="donate-links">
+      <a class="dl-mono" href="https://send.monobank.ua/jar/5gJoV4qc3n" target="_blank" rel="noopener noreferrer">💳 Банка monobank (гривня)</a>
+      <a class="dl-bmc" href="https://www.buymeacoffee.com/mranoven" target="_blank" rel="noopener noreferrer">☕ Buy Me a Coffee (USD / EUR, картка)</a>
+      <a class="dl-kofi" href="https://ko-fi.com/mranoven" target="_blank" rel="noopener noreferrer">❤️ Ko-fi (картка, PayPal)</a>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="settingsOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="settingsClose" type="button" aria-label="Закрити">✕</button>
+    <h2>⚙ Налаштування</h2>
+    <label class="settings-row"><span>Показувати підказки при запуску</span><input type="checkbox" id="tipsToggle"></label>
+    <p class="settings-note">Підказки — вікно з коротким поясненням, як користуватись. Тапніть на нього, щоб закрити.</p>
+    <button type="button" class="g" id="tipsShowNow" style="width:100%">📋 Показати підказки зараз</button>
+
+    <div class="settings-row" style="cursor:default"><span>Розмір цифр</span></div>
+    <div class="size-options" role="group" aria-label="Розмір цифр">
+      <button type="button" class="size-btn" data-size="1">100%</button>
+      <button type="button" class="size-btn" data-size="1.3">130%</button>
+      <button type="button" class="size-btn" data-size="1.6">160%</button>
+    </div>
+    <p class="settings-note">Збільшує цифри в записі прикладу — зручно для великого екрана чи проєктора.</p>
+
+    <label class="settings-row" id="wakeLockRow"><span>Не вимикати екран</span><input type="checkbox" id="wakeLockToggle" autocomplete="off"></label>
+    <p class="settings-note" id="wakeLockNote">Поки галочка стоїть, екран не гасне. Знімається щоразу, коли сторінку відкривають чи оновлюють.</p>
+
+    <label class="settings-row"><span>Дозволити кнопку «Показати відповідь»</span><input type="checkbox" id="allowShowToggle"></label>
+    <p class="settings-note">Якщо вимкнути, кнопка 👀 зникне — лишиться тільки 💡 підказка, без готової відповіді.</p>
+  </div>
+</div>
+
 <script>
 const $=id=>document.getElementById(id);
 let A,B,S,k,ph,mist,done,hintOn;
@@ -181,4 +345,202 @@ if('serviceWorker' in navigator){
     });
   });
 }
+</script>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+
+  // ---- Версії / «Що нового» ----
+  var RELEASES = [
+    {
+      version:"1.1", date:"30.09.2026",
+      items:[
+        "Додано мітку версії поруч із заголовком: дотик відкриває «Що нового»",
+        "Кнопка «☕ Підтримати проєкт» з вибором способу (monobank, Buy Me a Coffee, Ko-fi)",
+        "Кнопка «📤 Поділитися» — рідне меню поширення або копіювання посилання",
+        "Кнопка «📖 Інструкція» — короткий посібник для батьків і вчителів",
+        "Кнопка «🆕 Що нового» з історією версій",
+        "Кнопка «💌 Залишити побажання» (анонімна форма)",
+        "Розділ «Про тренажер» з відповідями на поширені запитання",
+        "Кнопка ⚙ «Налаштування»: підказки при запуску, розмір цифр, «не вимикати екран», можливість вимкнути кнопку «Показати відповідь»",
+        "Підказки при запуску — коротке вікно з поясненням, як користуватись"
+      ]
+    },
+    {
+      version:"1.0", date:"30.09.2026",
+      items:[
+        "Чотири рівні складності, перемикач «з остачею», власний приклад",
+        "Покрокове ділення в стовпчик: цифра частки, множення, віднімання",
+        "Підказки (💡) і «Показати відповідь» (👀), оцінка зірочками",
+        "Класичний вигляд стовпчика, підтримка темної теми, офлайн-режим (PWA)"
+      ]
+    }
+  ];
+  var APP_VERSION = RELEASES[0].version;
+
+  var versionBadge=$('versionBadge');
+  if(versionBadge) versionBadge.textContent='v'+APP_VERSION;
+
+  var releasesBox=$('releasesBox');
+  if(releasesBox){
+    RELEASES.forEach(function(r){
+      var h=document.createElement('h3'); h.textContent='v'+r.version+' — '+r.date;
+      releasesBox.appendChild(h);
+      var ul=document.createElement('ul');
+      r.items.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; ul.appendChild(li); });
+      releasesBox.appendChild(ul);
+    });
+  }
+
+  // ---- Модальні вікна: відкриття/закриття, Escape, клік поза карткою ----
+  function wireOverlay(overlayId, openTriggers, closeId){
+    var overlay=$(overlayId);
+    if(!overlay) return;
+    (openTriggers||[]).forEach(function(id){
+      var b=$(id); if(b) b.addEventListener('click', function(){ overlay.classList.add('open'); });
+    });
+    var closeBtn=$(closeId);
+    if(closeBtn) closeBtn.addEventListener('click', function(){ overlay.classList.remove('open'); });
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.classList.remove('open'); });
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){
+      document.querySelectorAll('.overlay.open').forEach(function(o){ o.classList.remove('open'); });
+    }
+  });
+
+  wireOverlay('helpOverlay', ['helpBtn'], 'helpClose');
+  wireOverlay('donateOverlay', ['donateBtn'], 'donateClose');
+  wireOverlay('settingsOverlay', ['gearBtn'], 'settingsClose');
+  wireOverlay('tipsOverlay', [], 'tipsClose');
+
+  // «Що нового» — окремо, бо ще й знімає позначку NEW
+  var changesOverlay=$('changesOverlay'), changesBtn=$('changesBtn');
+  var SEEN_KEY='dilSeenVersion';
+  function markSeen(){
+    try{ localStorage.setItem(SEEN_KEY, APP_VERSION); }catch(e){}
+    if(changesBtn) changesBtn.classList.remove('has-new');
+  }
+  function openChanges(){ if(changesOverlay) changesOverlay.classList.add('open'); markSeen(); }
+  if(changesBtn) changesBtn.addEventListener('click', openChanges);
+  if(versionBadge) versionBadge.addEventListener('click', openChanges);
+  var changesClose=$('changesClose');
+  if(changesClose) changesClose.addEventListener('click', function(){ changesOverlay.classList.remove('open'); });
+  if(changesOverlay) changesOverlay.addEventListener('click', function(e){ if(e.target===changesOverlay) changesOverlay.classList.remove('open'); });
+
+  (function refreshNewBadge(){
+    var seen=null;
+    try{ seen=localStorage.getItem(SEEN_KEY); }catch(e){}
+    if(seen===null){ markSeen(); return; } // новому відвідувачу не показуємо «оновлення»
+    if(changesBtn) changesBtn.classList.toggle('has-new', seen!==APP_VERSION);
+  })();
+
+  // ---- Підказки при запуску ----
+  var tipsOverlay=$('tipsOverlay'), tipsToggle=$('tipsToggle'), tipsShowNow=$('tipsShowNow');
+  var TIPS_KEY='dilShowTips';
+  function tipsEnabled(){ try{ return localStorage.getItem(TIPS_KEY)!=='0'; }catch(e){ return true; } }
+  function setTipsEnabled(on){ try{ localStorage.setItem(TIPS_KEY, on?'1':'0'); }catch(e){} }
+  if(tipsShowNow) tipsShowNow.addEventListener('click', function(){
+    var so=$('settingsOverlay'); if(so) so.classList.remove('open');
+    if(tipsOverlay) tipsOverlay.classList.add('open');
+  });
+  if(tipsEnabled() && tipsOverlay) tipsOverlay.classList.add('open');
+
+  // ---- Розмір цифр ----
+  var SIZE_KEY='dilBoardScale';
+  var sizeButtons=Array.prototype.slice.call(document.querySelectorAll('.size-btn'));
+  function applyScale(v){
+    document.documentElement.style.setProperty('--board-scale', String(v));
+    sizeButtons.forEach(function(b){ b.classList.toggle('active', parseFloat(b.getAttribute('data-size'))===v); });
+  }
+  function getScale(){ try{ var v=parseFloat(localStorage.getItem(SIZE_KEY)); return isNaN(v)?1:v; }catch(e){ return 1; } }
+  applyScale(getScale());
+  sizeButtons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var v=parseFloat(b.getAttribute('data-size'));
+      try{ localStorage.setItem(SIZE_KEY, String(v)); }catch(e){}
+      applyScale(v);
+    });
+  });
+
+  // ---- Дозволити кнопку «Показати відповідь» ----
+  var ALLOW_SHOW_KEY='dilAllowShow';
+  var allowShowToggle=$('allowShowToggle'), showBtn=$('show');
+  function allowShow(){ try{ return localStorage.getItem(ALLOW_SHOW_KEY)!=='0'; }catch(e){ return true; } }
+  function applyAllowShow(on){ if(showBtn) showBtn.style.display = on?'':'none'; }
+  applyAllowShow(allowShow());
+  if(allowShowToggle){
+    allowShowToggle.addEventListener('change', function(){
+      try{ localStorage.setItem(ALLOW_SHOW_KEY, allowShowToggle.checked?'1':'0'); }catch(e){}
+      applyAllowShow(allowShowToggle.checked);
+    });
+  }
+
+  // Заповнюємо стан галочок при відкритті налаштувань
+  var gearBtn=$('gearBtn');
+  if(gearBtn) gearBtn.addEventListener('click', function(){
+    if(tipsToggle) tipsToggle.checked = tipsEnabled();
+    if(allowShowToggle) allowShowToggle.checked = allowShow();
+  });
+  if(tipsToggle) tipsToggle.addEventListener('change', function(){ setTipsEnabled(tipsToggle.checked); });
+
+  // ---- Не вимикати екран (Screen Wake Lock) ----
+  (function(){
+    var row=$('wakeLockRow'), note=$('wakeLockNote'), toggle=$('wakeLockToggle');
+    if(!row || !toggle) return;
+    if(!navigator.wakeLock || typeof navigator.wakeLock.request!=='function'){
+      row.hidden=true; if(note) note.hidden=true; return;
+    }
+    var sentinel=null;
+    async function acquire(){
+      try{
+        var lock=await navigator.wakeLock.request('screen');
+        if(!toggle.checked){ lock.release().catch(function(){}); return; }
+        sentinel=lock;
+        lock.addEventListener('release', function(){ if(sentinel===lock) sentinel=null; });
+      }catch(e){ sentinel=null; toggle.checked=false; }
+    }
+    function release(){ if(sentinel){ var l=sentinel; sentinel=null; l.release().catch(function(){}); } }
+    toggle.addEventListener('change', function(){ toggle.checked?acquire():release(); });
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState==='visible' && toggle.checked && !sentinel) acquire();
+    });
+  })();
+
+  // ---- Поділитися ----
+  (function(){
+    var inviteBtn=$('inviteBtn'), toast=$('toast');
+    var shareUrl='https://mranoven-coder.github.io/dilennya/';
+    var timer=null;
+    function showToast(){
+      if(!toast) return;
+      toast.classList.add('show');
+      clearTimeout(timer);
+      timer=setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+    }
+    function fallbackCopy(text){
+      var ta=document.createElement('textarea');
+      ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta);
+    }
+    function copyLink(){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(shareUrl).then(showToast).catch(function(){ fallbackCopy(shareUrl); showToast(); });
+      } else { fallbackCopy(shareUrl); showToast(); }
+    }
+    if(inviteBtn) inviteBtn.addEventListener('click', function(){
+      var data={ title:'Ділення стовпчиком', text:'Безкоштовний тренажер ділення стовпчиком для дітей!', url:shareUrl };
+      if(navigator.share){
+        navigator.share(data).catch(function(err){ if(err && err.name==='AbortError') return; copyLink(); });
+        return;
+      }
+      copyLink();
+    });
+  })();
+
+})();
 </script></body></html>
