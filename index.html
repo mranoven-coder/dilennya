@@ -10,7 +10,6 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
 <meta name="version" content="1.1">
-<!-- ЗАМІНІТЬ на реальну адресу після створення сторінки на GitHub Pages -->
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -67,6 +66,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;padding:16px}
 main{width:100%;max-width:560px}
 h1{font-size:1.5rem;text-align:center;margin:4px 0 12px}
+.title-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:4px 0 12px}.title-row h1{margin:0}
 .card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px #0002}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
 select,input,button{font:inherit;padding:8px 12px;border-radius:10px;border:2px solid var(--pr);background:var(--card);color:var(--tx)}
@@ -128,7 +128,7 @@ small{color:var(--mu)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
 </style></head><body><main>
-<h1>➗ Ділення стовпчиком <button type="button" class="version-badge" id="versionBadge">v1.1</button></h1>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.1</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
