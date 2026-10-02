@@ -89,6 +89,7 @@ small{color:var(--mu)}
 .top-actions,.bottom-actions{margin:10px 0}
 .donate-btn{background:linear-gradient(135deg,#ff6a88,#ff4757)}
 .invite-btn{background:var(--pr)}
+.install-btn{background:linear-gradient(135deg,#2e9e5b,#1f7a45);display:none}
 .gear-btn{width:42px;height:42px;padding:0;border-radius:50%;flex:none;background:var(--card);color:var(--pr)}
 .help-btn{background:var(--or)}
 .changes-btn{background:var(--ok);position:relative}
@@ -133,6 +134,7 @@ small{color:var(--mu)}
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
 <button type="button" class="invite-btn" id="inviteBtn">📤 Поділитися</button>
 <button type="button" class="gear-btn" id="gearBtn" aria-label="Налаштування" title="Налаштування">⚙</button>
+<button type="button" class="install-btn" id="installBtn">📲 Встановити застосунок</button>
 </div>
 <div class="toast" id="toast">Посилання скопійовано!</div>
 
@@ -233,6 +235,19 @@ small{color:var(--mu)}
       <a class="dl-bmc" href="https://www.buymeacoffee.com/mranoven" target="_blank" rel="noopener noreferrer">☕ Buy Me a Coffee (USD / EUR, картка)</a>
       <a class="dl-kofi" href="https://ko-fi.com/mranoven" target="_blank" rel="noopener noreferrer">❤️ Ko-fi (картка, PayPal)</a>
     </div>
+  </div>
+</div>
+
+<div class="overlay" id="installOverlay" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-close" id="installClose" type="button" aria-label="Закрити">✕</button>
+    <h2>Встановити застосунок</h2>
+    <p>На iPhone та iPad це робиться вручну (у Safari):</p>
+    <ol>
+      <li>Натисніть кнопку «Поділитися» <b>⬆️</b> внизу екрана.</li>
+      <li>Прокрутіть меню і оберіть «На екран “Додому”».</li>
+      <li>Натисніть «Додати» — іконка з’явиться на головному екрані.</li>
+    </ol>
   </div>
 </div>
 
@@ -345,6 +360,32 @@ if('serviceWorker' in navigator){
     });
   });
 }
+
+/* Кнопка «Встановити застосунок» */
+(function(){
+  var btn=$('installBtn'), ov=$('installOverlay'), deferred=null;
+  if(!btn) return;
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  if(standalone) return;
+  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(ios) btn.style.display='inline-block';
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault();deferred=e;btn.style.display='inline-block';
+  });
+  window.addEventListener('appinstalled',function(){
+    deferred=null;btn.style.display='none';
+  });
+  btn.addEventListener('click',function(){
+    if(deferred){
+      deferred.prompt();
+      deferred.userChoice.then(function(){deferred=null;btn.style.display='none';});
+    }else if(ov){ov.classList.add('open');}
+  });
+  if(ov){
+    $('installClose').addEventListener('click',function(){ov.classList.remove('open');});
+    ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open');});
+  }
+})();
 </script>
 
 <script>
