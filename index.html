@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.1 (30.09.2026)
+  Ділення стовпчиком — тренажер — v1.2 (02.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний інтерактивний тренажер ділення в стовпчик для дітей: покрокове вгадування цифри частки, множення і віднімання з підказками. Працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.1">
+<meta name="version" content="1.2">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -43,7 +43,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.1"
+  "softwareVersion": "1.2"
 }
 </script>
 
@@ -128,7 +128,7 @@ small{color:var(--mu)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.1</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.2</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -163,7 +163,7 @@ small{color:var(--mu)}
   <p>Орієнтовно для дітей 7–11 років, які вже знають таблицю множення та вчаться ділити багатоцифрові числа.</p>
   <h3>Чи потрібен інтернет?</h3>
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.1 · 30.09.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.2 · 02.10.2026</p>
 </section>
 </main>
 
@@ -207,7 +207,7 @@ small{color:var(--mu)}
     <h3>4. Технічні примітки</h3>
     <ul>
       <li>Працює в будь-якому сучасному браузері на комп'ютері, планшеті й телефоні.</li>
-      <li>Після першого відкриття працює навіть без інтернету; можна встановити як застосунок.</li>
+      <li>Після першого відкриття працює навіть без інтернету; можна встановити як застосунок кнопкою «Встановити застосунок» (на iPhone — через «Поділитися»).</li>
       <li>Поруч із заголовком — мітка версії: дотик відкриває «Що нового».</li>
     </ul>
     <hr>
@@ -394,6 +394,13 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.2", date:"02.10.2026",
+      items:[
+        "Кнопка «📲 Встановити застосунок»: встановлення на телефон чи комп’ютер в один дотик (на iPhone — підказка, як зробити вручну)",
+        "Дрібні поліпшення для пошукових систем"
+      ]
+    },
     {
       version:"1.1", date:"30.09.2026",
       items:[
