@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.2 (02.10.2026)
+  Ділення стовпчиком — тренажер — v1.3 (03.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.2">
+<meta name="version" content="1.3">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.2"
+  "softwareVersion": "1.3"
 }
 </script>
 
@@ -128,8 +128,15 @@ small{color:var(--mu)}
 .size-btn{flex:1;padding:8px 4px;font-size:0.9rem;background:var(--card);color:var(--pr);border:2px solid var(--pr)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
+#kp{position:fixed;z-index:90;width:176px;background:var(--card);color:var(--tx);border:2px solid var(--pr);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);user-select:none;touch-action:none}
+#kp[hidden]{display:none}
+#kpHead{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 12px;cursor:grab;background:var(--pr);color:#fff;border-radius:11px 11px 0 0;font-size:.85rem;font-weight:600}
+#kpHead:active{cursor:grabbing}
+#kpHead button{background:transparent;padding:2px 8px;font-size:1rem;line-height:1}
+#kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
+#kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.2</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.3</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -170,7 +177,7 @@ small{color:var(--mu)}
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.2 · 02.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.3 · 03.10.2026</p>
 </section>
 </main>
 
@@ -183,7 +190,7 @@ small{color:var(--mu)}
       <li>Вгадай цифру частки — якщо не підходить, тренажер підкаже «забагато» чи «замало».</li>
       <li>Помнож і відніми — так само крок за кроком, поки приклад не буде розв'язано.</li>
       <li>💡 «Підказка» — безкоштовна допомога; 👀 «Показати відповідь» — готова відповідь (зі штрафом до зірочок).</li>
-      <li>⚙ — тут можна вимкнути ці підказки, збільшити цифри або заборонити кнопку «Показати відповідь».</li>
+      <li>⚙ — тут можна вимкнути ці підказки, збільшити цифри або заборонити кнопку «Показати відповідь»; на комп'ютері — ввімкнути екранну клавіатуру з цифрами.</li>
     </ol>
     <p class="settings-note">Тапни будь-де, щоб закрити.</p>
   </div>
@@ -204,7 +211,8 @@ small{color:var(--mu)}
       <li><b>Своє</b> — можна ввести власне ділене й дільник.</li>
       <li><b>💡 Підказка</b> — підказує без штрафу (таблиця множення, порада щодо множення чи віднімання).</li>
       <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки. Цю кнопку можна вимкнути в ⚙.</li>
-      <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь».</li>
+      <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь», екранна клавіатура (на комп'ютері).</li>
+      <li><b>⌨ Екранна клавіатура</b> (лише на комп'ютері) — вікно з цифрами для вводу мишею; його можна перетягувати. Вмикається в ⚙, за замовчуванням вимкнена.</li>
     </ul>
     <h3>3. Як користуватись покроково</h3>
     <p><b>Крок 1.</b> Оберіть найпростіший рівень («2 цифри ÷ 1 цифру») без остачі.</p>
@@ -279,6 +287,19 @@ small{color:var(--mu)}
 
     <label class="settings-row"><span>Дозволити кнопку «Показати відповідь»</span><input type="checkbox" id="allowShowToggle"></label>
     <p class="settings-note">Якщо вимкнути, кнопка 👀 зникне — лишиться тільки 💡 підказка, без готової відповіді.</p>
+
+    <label class="settings-row" id="kpRow" style="display:none"><span>Показувати екранну клавіатуру</span><input type="checkbox" id="kpToggle"></label>
+    <p class="settings-note" id="kpNote" style="display:none">Вікно з цифрами, яке можна перетягувати мишею. Доступне лише на комп'ютері.</p>
+  </div>
+</div>
+
+<div id="kp" hidden role="group" aria-label="Екранна клавіатура">
+  <div id="kpHead"><span>⌨ Цифри</span><button type="button" id="kpClose" aria-label="Закрити клавіатуру">✕</button></div>
+  <div id="kpKeys">
+    <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button>
+    <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
+    <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
+    <button type="button" class="g" data-k="bs" aria-label="Стерти">⌫</button><button type="button" data-k="0">0</button><button type="button" data-k="ok" style="background:var(--ok)" aria-label="Перевірити">✔</button>
   </div>
 </div>
 
@@ -401,6 +422,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.3", date:"03.10.2026",
+      items:[
+        "Екранна цифрова клавіатура для комп’ютера: вікно з цифрами, яке можна перетягувати мишею. Вмикається галочкою в ⚙ «Налаштування» (за замовчуванням вимкнена)"
+      ]
+    },
     {
       version:"1.2", date:"02.10.2026",
       items:[
@@ -598,4 +625,68 @@ if('serviceWorker' in navigator){
   })();
 
 })();
-</script></body></html>
+</script><script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var kp=$('kp'), row=$('kpRow'), note=$('kpNote'), tog=$('kpToggle');
+  if(!kp||!row||!tog||!window.matchMedia||!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  row.style.display=''; if(note) note.style.display='';
+  var KEY='dilKeypad', POS='dilKeypadPos', target=$('ans');
+  function on(){ try{ return localStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
+  function setOn(v){ try{ localStorage.setItem(KEY, v?'1':'0'); }catch(e){} }
+  function place(x,y){
+    x=Math.max(0,Math.min(x,window.innerWidth-kp.offsetWidth));
+    y=Math.max(0,Math.min(y,window.innerHeight-kp.offsetHeight));
+    kp.style.left=x+'px'; kp.style.top=y+'px';
+  }
+  function show(v){
+    kp.hidden=!v;
+    if(!v) return;
+    var p=null; try{ p=JSON.parse(localStorage.getItem(POS)); }catch(e){}
+    if(p&&isFinite(p.x)&&isFinite(p.y)) place(p.x,p.y); else place(window.innerWidth-kp.offsetWidth-24,140);
+  }
+  ['ans','a','b'].forEach(function(id){ var el=$(id); if(el) el.addEventListener('focus',function(){ target=el; }); });
+  function field(){ return target||$('ans'); }
+  function type(ch){
+    var el=field(), s=el.selectionStart, e=el.selectionEnd;
+    if(s==null){ s=e=el.value.length; }
+    el.value=el.value.slice(0,s)+ch+el.value.slice(e);
+    try{ el.setSelectionRange(s+ch.length,s+ch.length); }catch(x){}
+    el.focus();
+  }
+  function back(){
+    var el=field(), s=el.selectionStart, e=el.selectionEnd;
+    if(s==null){ s=e=el.value.length; }
+    if(s===e&&s>0) s--;
+    el.value=el.value.slice(0,s)+el.value.slice(e);
+    try{ el.setSelectionRange(s,s); }catch(x){}
+    el.focus();
+  }
+  $('kpKeys').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var k=b.getAttribute('data-k');
+    if(k==='bs') back();
+    else if(k==='ok'){ if(target&&(target.id==='a'||target.id==='b')) $('own').click(); else $('ok').click(); }
+    else type(k);
+  });
+  kp.addEventListener('mousedown',function(e){ e.preventDefault(); });
+  var head=$('kpHead'), drag=null;
+  head.addEventListener('pointerdown',function(e){
+    if(e.target.closest('#kpClose')) return;
+    drag={dx:e.clientX-kp.offsetLeft, dy:e.clientY-kp.offsetTop};
+    try{ head.setPointerCapture(e.pointerId); }catch(x){}
+  });
+  head.addEventListener('pointermove',function(e){ if(drag) place(e.clientX-drag.dx,e.clientY-drag.dy); });
+  function endDrag(){
+    if(!drag) return; drag=null;
+    try{ localStorage.setItem(POS, JSON.stringify({x:kp.offsetLeft,y:kp.offsetTop})); }catch(e){}
+  }
+  head.addEventListener('pointerup',endDrag); head.addEventListener('pointercancel',endDrag);
+  window.addEventListener('resize',function(){ if(!kp.hidden) place(kp.offsetLeft,kp.offsetTop); });
+  var gear=$('gearBtn'); if(gear) gear.addEventListener('click',function(){ tog.checked=on(); });
+  tog.addEventListener('change',function(){ setOn(tog.checked); show(tog.checked); });
+  $('kpClose').addEventListener('click',function(){ setOn(false); tog.checked=false; show(false); });
+  show(on());
+})();
+</script>
+</body></html>
