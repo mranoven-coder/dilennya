@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.4 (04.10.2026)
+  Ділення стовпчиком — тренажер — v1.5 (04.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.4">
+<meta name="version" content="1.5">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.4"
+  "softwareVersion": "1.5"
 }
 </script>
 
@@ -128,6 +128,11 @@ small{color:var(--mu)}
 .size-btn{flex:1;padding:8px 4px;font-size:0.9rem;background:var(--card);color:var(--pr);border:2px solid var(--pr)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
+body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+.ty{color:var(--ok)}.bad{color:var(--er)!important}
+.cr{position:relative;display:inline-block;width:0}
+.cr::after{content:'';position:absolute;left:1px;top:.12em;width:3px;height:1em;background:currentColor;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
 #kp{position:fixed;z-index:90;width:176px;background:var(--card);color:var(--tx);border:2px solid var(--pr);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);user-select:none;touch-action:none}
 #kp[hidden]{display:none}
 #kpHead{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 12px;cursor:grab;background:var(--pr);color:#fff;border-radius:11px 11px 0 0;font-size:.85rem;font-weight:600}
@@ -136,7 +141,7 @@ small{color:var(--mu)}
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.4</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.5</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -153,7 +158,7 @@ small{color:var(--mu)}
 <div class="row" style="margin-top:10px"><small>Своє:</small><input class="n" id="a" inputmode="numeric" placeholder="ділене"><b>:</b><input class="n" id="b" inputmode="numeric" placeholder="дільник"><button class="g" id="own">Почати</button></div></div>
 <div class="card"><div id="board"></div></div>
 <div class="card"><div id="msg"></div>
-<div class="row"><input id="ans" inputmode="numeric" autocomplete="off"><button id="ok">Перевірити</button></div>
+<div class="row" id="ansRow"><input id="ans" inputmode="numeric" autocomplete="off"><button id="ok">Перевірити</button></div>
 <div class="row" style="margin-top:10px"><button class="g" id="hint">💡 Підказка</button><button class="g" id="show">👀 Показати відповідь</button></div></div>
 
 <div class="row bottom-actions">
@@ -177,7 +182,7 @@ small{color:var(--mu)}
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.4 · 04.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.5 · 04.10.2026</p>
 </section>
 </main>
 
@@ -290,6 +295,9 @@ small{color:var(--mu)}
 
     <label class="settings-row" id="kpRow" style="display:none"><span>Показувати екранну клавіатуру</span><input type="checkbox" id="kpToggle"></label>
     <p class="settings-note" id="kpNote" style="display:none">Вікно з цифрами, яке можна перетягувати мишею. Доступне лише на комп'ютері.</p>
+
+    <label class="settings-row" id="inRow" style="display:none"><span>Вводити цифри прямо в записі (як у зошиті)</span><input type="checkbox" id="inToggle"></label>
+    <p class="settings-note" id="inNote" style="display:none">Замість окремого поля цифри з'являються на самій дошці. Якщо вимкнути, повернеться поле «Перевірити». Лише на комп'ютері.</p>
   </div>
 </div>
 
@@ -331,6 +339,7 @@ function draw(){
  let top=' '+[...ds].map((c,i)=>{
   const cls=(!done&&i<hi&&i>=(k==0?0:hi-1))?(k==0?'hl':'dn'):'';return cls?`<span class="${cls}">${c}</span>`:c}).join('');
  let rows=[top];
+ const inl=document.body.classList.contains('inline')&&!done,an=$('ans'),tv=inl?an.value:'',bad=inl&&an.dataset.bad?' bad':'',cr=inl&&!bad?'<i class="cr"></i>':'';
  const upto=done?S.length:k;
  for(let i=0;i<=Math.min(upto,S.length-1);i++){
   const s=S[i],e=s.n-1;
@@ -338,17 +347,24 @@ function draw(){
    if(S[i-1].q===0&&i-1>0)rows[rows.length-1]=ln;else rows.push(ln)}
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
+  if(inl&&i==k){
+   if(ph==1){const L=Math.max(tv.length,1);rows.push(' '.repeat(Math.max(0,e+1-L))+'<span class="pd ul'+bad+'">−'+tv+cr+'</span>')}
+   else if(ph==2){rows.push(tv?'<span class="ty'+bad+'">'+pad(tv,e,1)+cr+'</span>':' '.repeat(e+1)+cr)}
+  }
  }
  if(done){const s=S[S.length-1],ln='<span style="color:var(--ok)">'+pad(String(s.r),s.n-1,1)+'</span>';
   if(s.q===0&&S.length>1)rows[rows.length-1]=ln;else rows.push(ln)}
- let q='';for(let i=0;i<S.length;i++){q+=(i<k||done||(i==k&&ph>=1))?S[i].q:'<span class="qq">·</span>'}
+ let q='';for(let i=0;i<S.length;i++){
+  if(i<k||done||(i==k&&ph>=1))q+=S[i].q;
+  else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+tv+cr+'</span>':'<span class="ty">'+cr+'</span><span class="qq">·</span>';
+  else q+='<span class="qq">·</span>'}
  $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd">${B}</span><div class="q">${q}</div></pre></div>`}
 function ask(){
  const s=S[k],m=$('msg');m.className='';
  const t=[`Скільки разів ${B} вміщується в ${s.cur}? (Яка цифра в частці?)`,
   `Перемнож: ${s.q} × ${B} = ?`,`Віднімемо: ${s.cur} − ${s.p} = ?`][ph];
  m.textContent=(k>0&&ph==0?`Зносимо цифру ${String(s.cur).slice(-1)}. `:'')+t;
- $('ans').value='';$('ans').focus()}
+ $('ans').value='';delete $('ans').dataset.bad;$('ans').focus();if(document.body.classList.contains('inline'))draw()}
 function hint(){
  const s=S[k];let h='';
  if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
@@ -367,7 +383,7 @@ function check(){
   draw()}
  else{mist++;m.className='er';let t='❌ Ще раз.';
   if(ph==0)t+=g*B>s.cur?` ${g}×${B}=${g*B} — це більше за ${s.cur}, бери менше.`:` ${g}×${B}=${g*B}, залишиться забагато (≥ ${B}) — бери більше.`;
-  m.textContent=t;$('ans').classList.remove('shake');void $('ans').offsetWidth;$('ans').classList.add('shake');$('ans').select()}}
+  m.textContent=t;const inl=document.body.classList.contains('inline'),sh=inl?$('board'):$('ans');sh.classList.remove('shake');void sh.offsetWidth;sh.classList.add('shake');$('ans').select();if(inl){$('ans').dataset.bad='1';draw()}}}
 function finish(){
  done=true;draw();const s=S[S.length-1],st=mist==0?'⭐⭐⭐':mist<=2?'⭐⭐':'⭐';
  const q=S.map(x=>x.q).join('').replace(/^0+(?=\d)/,'');
@@ -422,6 +438,13 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.5", date:"04.10.2026",
+      items:[
+        "На комп’ютері цифри відповіді вводяться прямо в записі, як у зошиті: окреме поле й кнопка «Перевірити» зникли. Цифра частки перевіряється одразу, добуток і остача підтверджуються Enter (або ✔ на екранній клавіатурі)",
+        "У ⚙ «Налаштування» є галочка, щоб повернути поле для відповіді"
+      ]
+    },
     {
       version:"1.4", date:"04.10.2026",
       items:[
@@ -659,6 +682,7 @@ if('serviceWorker' in navigator){
     if(s==null){ s=e=el.value.length; }
     el.value=el.value.slice(0,s)+ch+el.value.slice(e);
     try{ el.setSelectionRange(s+ch.length,s+ch.length); }catch(x){}
+    el.dispatchEvent(new Event('input',{bubbles:true}));
     el.focus();
   }
   function back(){
@@ -667,6 +691,7 @@ if('serviceWorker' in navigator){
     if(s===e&&s>0) s--;
     el.value=el.value.slice(0,s)+el.value.slice(e);
     try{ el.setSelectionRange(s,s); }catch(x){}
+    el.dispatchEvent(new Event('input',{bubbles:true}));
     el.focus();
   }
   $('kpKeys').addEventListener('click',function(e){
@@ -694,6 +719,55 @@ if('serviceWorker' in navigator){
   tog.addEventListener('change',function(){ setOn(tog.checked); show(tog.checked); });
   $('kpClose').addEventListener('click',function(){ setOn(false); tog.checked=false; show(false); });
   show(on());
+})();
+</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var row=$('inRow'), note=$('inNote'), tog=$('inToggle'), ans=$('ans');
+  if(!row||!tog||!ans||!window.matchMedia||!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  row.style.display=''; if(note) note.style.display='';
+  var KEY='dilInline';
+  function on(){ try{ return localStorage.getItem(KEY)!=='0'; }catch(e){ return true; } }
+  function inl(){ return document.body.classList.contains('inline'); }
+  function apply(v){
+    document.body.classList.toggle('inline',v);
+    if(typeof S!=='undefined'&&S) draw();
+    try{ ans.focus(); }catch(e){}
+  }
+  ans.addEventListener('input',function(){
+    if(!inl()||done) return;
+    var v=ans.value.replace(/\D/g,'');
+    v = ph===0 ? v.slice(-1) : v.slice(0,7);
+    if(v!==ans.value) ans.value=v;
+    delete ans.dataset.bad;
+    draw();
+    if(ph===0&&v.length===1) check();
+  });
+  document.addEventListener('keydown',function(e){
+    if(!inl()||done||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('.overlay.open')) return;
+    var t=e.target, k=e.key;
+    if(t===ans) return;
+    if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    var v=ans.value, s=ans.selectionStart, en=ans.selectionEnd;
+    if(s==null){ s=en=v.length; }
+    if(/^[0-9]$/.test(k)){
+      ans.value=v.slice(0,s)+k+v.slice(en);
+      try{ ans.setSelectionRange(s+1,s+1); }catch(x){}
+    }else if(k==='Backspace'){
+      if(s===en&&s>0) s--;
+      ans.value=v.slice(0,s)+v.slice(en);
+      try{ ans.setSelectionRange(s,s); }catch(x){}
+    }else if(k==='Enter'&&(!t||t===document.body)){
+      $('ok').click(); e.preventDefault(); return;
+    }else return;
+    e.preventDefault();
+    ans.dispatchEvent(new Event('input',{bubbles:true}));
+    try{ ans.focus(); }catch(x){}
+  });
+  var gear=$('gearBtn'); if(gear) gear.addEventListener('click',function(){ tog.checked=on(); });
+  tog.addEventListener('change',function(){ try{ localStorage.setItem(KEY,tog.checked?'1':'0'); }catch(e){} apply(tog.checked); });
+  apply(on());
 })();
 </script>
 </body></html>
