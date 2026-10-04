@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.5 (04.10.2026)
+  Ділення стовпчиком — тренажер — v1.53 (04.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.5">
+<meta name="version" content="1.53">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.5"
+  "softwareVersion": "1.53"
 }
 </script>
 
@@ -130,8 +130,8 @@ small{color:var(--mu)}
 [hidden]{display:none !important}
 body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 .ty{color:var(--ok)}.bad{color:var(--er)!important}
-.cr{position:relative;display:inline-block;width:0}
-.cr::after{content:'';position:absolute;left:1px;top:.12em;width:3px;height:1em;background:currentColor;animation:bl 1s steps(1) infinite}
+.dot{display:inline-block;width:0;overflow:visible;animation:bl 1s steps(1) infinite}
+.blink{animation:bl 1s steps(1) infinite}
 @keyframes bl{50%{opacity:0}}
 #kp{position:fixed;z-index:90;width:176px;background:var(--card);color:var(--tx);border:2px solid var(--pr);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);user-select:none;touch-action:none}
 #kp[hidden]{display:none}
@@ -141,7 +141,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.5</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.53</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -182,7 +182,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.5 · 04.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.53 · 04.10.2026</p>
 </section>
 </main>
 
@@ -339,7 +339,7 @@ function draw(){
  let top=' '+[...ds].map((c,i)=>{
   const cls=(!done&&i<hi&&i>=(k==0?0:hi-1))?(k==0?'hl':'dn'):'';return cls?`<span class="${cls}">${c}</span>`:c}).join('');
  let rows=[top];
- const inl=document.body.classList.contains('inline')&&!done,an=$('ans'),tv=inl?an.value:'',bad=inl&&an.dataset.bad?' bad':'',cr=inl&&!bad?'<i class="cr"></i>':'';
+ const inl=document.body.classList.contains('inline')&&!done,an=$('ans'),tv=inl?an.value:'',bad=inl&&an.dataset.bad?' bad':'',cr=inl&&!bad?'<span class="dot">·</span>':'';
  const upto=done?S.length:k;
  for(let i=0;i<=Math.min(upto,S.length-1);i++){
   const s=S[i],e=s.n-1;
@@ -348,7 +348,7 @@ function draw(){
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
   if(inl&&i==k){
-   if(ph==1){const L=Math.max(tv.length,1);rows.push(' '.repeat(Math.max(0,e+1-L))+'<span class="pd ul'+bad+'">−'+tv+cr+'</span>')}
+   if(ph==1){rows.push(tv?' '.repeat(Math.max(0,e+1-tv.length))+'<span class="pd ul'+bad+'">−'+tv+cr+'</span>':' '.repeat(e+1)+cr)}
    else if(ph==2){rows.push(tv?'<span class="ty'+bad+'">'+pad(tv,e,1)+cr+'</span>':' '.repeat(e+1)+cr)}
   }
  }
@@ -356,7 +356,7 @@ function draw(){
   if(s.q===0&&S.length>1)rows[rows.length-1]=ln;else rows.push(ln)}
  let q='';for(let i=0;i<S.length;i++){
   if(i<k||done||(i==k&&ph>=1))q+=S[i].q;
-  else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+tv+cr+'</span>':'<span class="ty">'+cr+'</span><span class="qq">·</span>';
+  else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+tv+'</span>':'<span class="ty blink">·</span>';
   else q+='<span class="qq">·</span>'}
  $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd">${B}</span><div class="q">${q}</div></pre></div>`}
 function ask(){
@@ -438,6 +438,24 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.53", date:"04.10.2026",
+      items:[
+        "Добуток і остача перевіряються самі, щойно набрано потрібну кількість цифр: курсор одразу переходить на наступне місце, Enter натискати не обов’язково"
+      ]
+    },
+    {
+      version:"1.52", date:"04.10.2026",
+      items:[
+        "Мінус і риска під числом при множенні з’являються разом з першою набраною цифрою добутку, а не наперед"
+      ]
+    },
+    {
+      version:"1.51", date:"04.10.2026",
+      items:[
+        "Замість миготливої риски курсором тепер служить миготлива крапка; прибрано зайву смугу прокрутки біля запису"
+      ]
+    },
     {
       version:"1.5", date:"04.10.2026",
       items:[
@@ -742,7 +760,7 @@ if('serviceWorker' in navigator){
     if(v!==ans.value) ans.value=v;
     delete ans.dataset.bad;
     draw();
-    if(ph===0&&v.length===1) check();
+    if(v.length===(ph===0?1:String(correct()).length)) check();
   });
   document.addEventListener('keydown',function(e){
     if(!inl()||done||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('.overlay.open')) return;
