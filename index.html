@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.58 (04.10.2026)
+  Ділення стовпчиком — тренажер — v1.6 (04.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.58">
+<meta name="version" content="1.6">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.58"
+  "softwareVersion": "1.6"
 }
 </script>
 
@@ -129,6 +129,13 @@ small{color:var(--mu)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
 #ownBtn{display:none}body.inline #ownBtn{display:inline-block}body.inline .ed{cursor:pointer;border-radius:6px}body.inline .ed:hover{background:rgba(74,127,214,.22)}body.inline #ownRow{display:none}
+#pad{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--card);border-top:2px solid var(--pr);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 16px rgba(0,0,0,.3);user-select:none;touch-action:manipulation}
+body.inline.phone #pad{display:block}
+body.inline.phone{padding-bottom:210px}
+#padKeys{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;max-width:560px;margin:0 auto}
+#padKeys button{padding:14px 0;font-size:1.3rem;border-radius:10px}
+#padKeys .x{grid-column:1/-1;display:none;font-size:1rem}
+body.editing #padKeys .x{display:block}
 body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 .ty{color:var(--ok)}.bad{color:var(--er)!important}
 .dot{display:inline-block;width:0;overflow:visible;animation:bl 1s steps(1) infinite}
@@ -142,7 +149,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.58</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.6</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -183,7 +190,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.58 · 04.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.6 · 04.10.2026</p>
 </section>
 </main>
 
@@ -214,11 +221,12 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
       <li><b>Рівень складності</b> — від «2 цифри ÷ 1 цифру» до «3–4 цифри ÷ 2 цифри».</li>
       <li><b>З остачею</b> — галочка вмикає приклади з остачею; без неї числа завжди діляться рівно.</li>
       <li><b>Нове завдання</b> — генерує випадковий приклад обраної складності.</li>
-      <li><b>Своє</b> — можна ввести власне ділене й дільник. На комп'ютері: натисни «✏️ Своє» (або клікни по числу на дошці), набери ділене й Enter, потім дільник і Enter; Esc — скасувати.</li>
+      <li><b>Своє</b> — можна ввести власне ділене й дільник. Натисни «✏️ Своє» (або клікни по числу на дошці), набери ділене й ✔ (Enter), потім дільник і ✔; Esc або ✕ — скасувати.</li>
       <li><b>💡 Підказка</b> — підказує без штрафу (таблиця множення, порада щодо множення чи віднімання).</li>
       <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки. Цю кнопку можна вимкнути в ⚙.</li>
       <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь», екранна клавіатура (на комп'ютері).</li>
-      <li><b>⌨ Екранна клавіатура</b> (лише на комп'ютері) — вікно з цифрами для вводу мишею; його можна перетягувати. Вмикається в ⚙, за замовчуванням вимкнена.</li>
+      <li><b>⌨ Екранна клавіатура</b> (режим «Комп'ютер») — вікно з цифрами для вводу мишею; його можна перетягувати. Вмикається в ⚙, за замовчуванням вимкнена.</li>
+      <li><b>📱 Телефон</b> — цифри вводяться панеллю внизу екрана. У ⚙ «Режим введення» можна обрати «Авто», «Комп'ютер» чи «Телефон».</li>
     </ul>
     <h3>3. Як користуватись покроково</h3>
     <p><b>Крок 1.</b> Оберіть найпростіший рівень («2 цифри ÷ 1 цифру») без остачі.</p>
@@ -295,10 +303,13 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
     <p class="settings-note">Якщо вимкнути, кнопка 👀 зникне — лишиться тільки 💡 підказка, без готової відповіді.</p>
 
     <label class="settings-row" id="kpRow" style="display:none"><span>Показувати екранну клавіатуру</span><input type="checkbox" id="kpToggle"></label>
-    <p class="settings-note" id="kpNote" style="display:none">Вікно з цифрами, яке можна перетягувати мишею. Доступне лише на комп'ютері.</p>
+    <p class="settings-note" id="kpNote" style="display:none">Вікно з цифрами, яке можна перетягувати. Доступне в режимі «Комп'ютер».</p>
 
     <label class="settings-row" id="inRow" style="display:none"><span>Вводити цифри прямо в записі (як у зошиті)</span><input type="checkbox" id="inToggle"></label>
-    <p class="settings-note" id="inNote" style="display:none">Замість окремого поля цифри з'являються на самій дошці. Якщо вимкнути, повернеться поле «Перевірити». Лише на комп'ютері.</p>
+    <p class="settings-note" id="inNote" style="display:none">Замість окремого поля цифри з'являються на самій дошці. Якщо вимкнути, повернеться поле «Перевірити» й системна клавіатура.</p>
+
+    <label class="settings-row" id="modeRow"><span>Режим введення</span><select id="modeSel"><option value="auto">Авто</option><option value="desk">Комп'ютер</option><option value="phone">Телефон</option></select></label>
+    <p class="settings-note">«Авто» сам вибирає за пристроєм: телефон показує панель цифр унизу екрана, а комп'ютер чи планшет із мишею або клавіатурою працює як комп'ютер.</p>
   </div>
 </div>
 
@@ -309,6 +320,14 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
     <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
     <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
     <button type="button" class="g" data-k="bs" aria-label="Стерти">⌫</button><button type="button" data-k="0">0</button><button type="button" data-k="ok" style="background:var(--ok)" aria-label="Перевірити">✔</button>
+  </div>
+</div>
+
+<div id="pad" role="group" aria-label="Цифри">
+  <div id="padKeys">
+    <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button><button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" class="g" data-k="bs" aria-label="Стерти">⌫</button>
+    <button type="button" data-k="6">6</button><button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button><button type="button" data-k="0">0</button><button type="button" data-k="ok" style="background:var(--ok)" aria-label="Підтвердити">✔</button>
+    <button type="button" class="g x" data-k="cancel">✕ Скасувати зміну</button>
   </div>
 </div>
 
@@ -325,7 +344,7 @@ function gen(){
  else{d=R(11,29);const lo=200,hi=9999;if(r)a=R(lo,hi);else a=d*R(Math.ceil(lo/d),Math.floor(hi/d))}
  A0=a;D0=d}
 function start(a,d){
- if(!(a>0&&d>1&&Number.isInteger(a)&&Number.isInteger(d))||String(a).length>7||Math.floor(a/d)<10){$('msg').textContent='Введи приклад, де частка матиме щонайменше 2 цифри (дільник від 2, ділене до 7 цифр, помітно більше за дільник).';return}
+ if(!(a>0&&d>1&&Number.isInteger(a)&&Number.isInteger(d))||String(a).length>7||d>a){$('msg').textContent='Введи приклад: дільник від 2 і не більший за ділене, ділене до 7 цифр.';return}
  A=a;B=d;const ds=String(a);let n=1,cur=+ds[0];
  while(cur<d&&n<ds.length){cur=cur*10+ +ds[n];n++}
  S=[];
@@ -440,6 +459,14 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.6", date:"04.10.2026",
+      items:[
+        "Телефон: цифри вводяться панеллю внизу екрана замість системної клавіатури, прямо в записі на дошці; дотик по діленому чи дільнику відкриває їх для зміни",
+        "Дільник може бути будь-яким від 2 до самого діленого (наприклад, 21 : 7); обмеження «частка з 2 цифр» діє лише для випадкових прикладів",
+        "У ⚙ «Режим введення»: Авто (сам визначає пристрій; планшет переходить у режим «Комп’ютер», щойно ви натиснете клавішу чи зрушите мишу), Комп’ютер або Телефон"
+      ]
+    },
     {
       version:"1.58", date:"04.10.2026",
       items:[
@@ -709,8 +736,7 @@ if('serviceWorker' in navigator){
 (function(){
   var $=function(id){return document.getElementById(id);};
   var kp=$('kp'), row=$('kpRow'), note=$('kpNote'), tog=$('kpToggle');
-  if(!kp||!row||!tog||!window.matchMedia||!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  row.style.display=''; if(note) note.style.display='';
+  if(!kp||!row||!tog) return;
   var KEY='dilKeypad', POS='dilKeypadPos', target=$('ans');
   function on(){ try{ return localStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
   function setOn(v){ try{ localStorage.setItem(KEY, v?'1':'0'); }catch(e){} }
@@ -744,14 +770,18 @@ if('serviceWorker' in navigator){
     el.dispatchEvent(new Event('input',{bubbles:true}));
     el.focus();
   }
-  $('kpKeys').addEventListener('click',function(e){
+  function keyClick(e){
     var b=e.target.closest('button'); if(!b) return;
     var k=b.getAttribute('data-k');
     if(k==='bs') back();
     else if(k==='ok'){ if(target&&(target.id==='a'||target.id==='b')) $('own').click(); else $('ok').click(); }
+    else if(k==='cancel'){ if(window.custCancel) window.custCancel(); }
     else type(k);
-  });
+  }
+  $('kpKeys').addEventListener('click',keyClick);
+  if($('padKeys')) $('padKeys').addEventListener('click',keyClick);
   kp.addEventListener('mousedown',function(e){ e.preventDefault(); });
+  if($('pad')) $('pad').addEventListener('mousedown',function(e){ e.preventDefault(); });
   var head=$('kpHead'), drag=null;
   head.addEventListener('pointerdown',function(e){
     if(e.target.closest('#kpClose')) return;
@@ -766,24 +796,27 @@ if('serviceWorker' in navigator){
   head.addEventListener('pointerup',endDrag); head.addEventListener('pointercancel',endDrag);
   window.addEventListener('resize',function(){ if(!kp.hidden) place(kp.offsetLeft,kp.offsetTop); });
   var gear=$('gearBtn'); if(gear) gear.addEventListener('click',function(){ tog.checked=on(); });
-  tog.addEventListener('change',function(){ setOn(tog.checked); show(tog.checked); });
-  $('kpClose').addEventListener('click',function(){ setOn(false); tog.checked=false; show(false); });
-  show(on());
+  tog.addEventListener('change',function(){ setOn(tog.checked); if(window.dilRefresh) window.dilRefresh(); });
+  $('kpClose').addEventListener('click',function(){ setOn(false); tog.checked=false; if(window.dilRefresh) window.dilRefresh(); });
+  window.kpApply=show;
 })();
 </script>
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
   var row=$('inRow'), note=$('inNote'), tog=$('inToggle'), ans=$('ans');
-  if(!row||!tog||!ans||!window.matchMedia||!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if(!row||!tog||!ans) return;
   row.style.display=''; if(note) note.style.display='';
-  var KEY='dilInline';
+  var KEY='dilInline', MKEY='dilMode', msel=$('modeSel');
+  var finePtr=!!(window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches), detected=finePtr?'desk':'phone';
+  function pref(){ try{ return localStorage.getItem(MKEY)||'auto'; }catch(e){ return 'auto'; } }
+  function mode(){ var p=pref(); return p==='auto'?detected:p; }
   function on(){ try{ return localStorage.getItem(KEY)!=='0'; }catch(e){ return true; } }
   function inl(){ return document.body.classList.contains('inline'); }
   var cust=null, vals={a:'',b:''}, snap=null, dotz='<span class="dot">·</span>', blk='<span class="blink">·</span>';
   var EDT=' title="Натисни, щоб змінити"';
   function say(t,c){ var m=$('msg'); m.className=c||''; m.textContent=t; }
-  function setBtns(dis){ $('hint').disabled=dis; $('show').disabled=dis; }
+  function setBtns(dis){ $('hint').disabled=dis; $('show').disabled=dis; document.body.classList.toggle('editing',dis); }
   function snapshot(){
     var m=$('msg');
     snap={A:A,B:B,S:S,k:k,ph:ph,mist:mist,done:done,hintOn:hintOn,cls:m.className,html:m.innerHTML,v:ans.value,bad:ans.dataset.bad};
@@ -802,9 +835,9 @@ if('serviceWorker' in navigator){
     $('board').innerHTML='<div class="wrap"><pre>'+left+'</pre><pre class="dv">'+right+'</pre></div>';
   }
   function custInput(){
-    var v=ans.value.replace(/\D/g,'').replace(/^0+/,'').slice(0,cust==='a'?7:4), rej=false;
-    if(cust==='b'&&+vals.a>=20){
-      var max=Math.floor(+vals.a/10);
+    var v=ans.value.replace(/\D/g,'').replace(/^0+/,'').slice(0,7), rej=false;
+    if(cust==='b'&&+vals.a>=2){
+      var max=+vals.a;
       while(v&&+v>max){ v=v.slice(0,-1); rej=true; }
       if(rej) say('Для '+vals.a+' дільник від 2 до '+max+'.','er');
     }
@@ -816,15 +849,15 @@ if('serviceWorker' in navigator){
   }
   function focusEnd(){ try{ ans.focus(); ans.setSelectionRange(ans.value.length,ans.value.length); }catch(e){} }
   function toB(strict){
-    var a=+ans.value, good=a>=20;
-    if(!good&&strict){ say('Ділене має бути не менше 20 — тоді частка матиме щонайменше 2 цифри.','er'); return false; }
+    var a=+ans.value, good=a>=2;
+    if(!good&&strict){ say('Ділене має бути не менше 2.','er'); return false; }
     vals.a=ans.value; cust='b';
     var t;
     if(good){
-      var max=Math.floor(a/10), note='';
+      var max=a, note='';
       if(vals.b&&+vals.b>max){ vals.b=''; note='Попередній дільник завеликий. '; }
       t=note+'Введи дільник від 2 до '+max+' і натисни Enter або ✔.';
-    }else t='Змінюй дільник. Ділене ще не введено (не менше 20), тому допустимий діапазон стане відомий після нього.';
+    }else t='Змінюй дільник. Ділене ще не введено (не менше 2), тому допустимий діапазон стане відомий після нього.';
     ans.value=vals.b; delete ans.dataset.bad;
     say(t); renderCust(); focusEnd(); return true;
   }
@@ -834,7 +867,7 @@ if('serviceWorker' in navigator){
     if(!cust){ snapshot(); vals={a:String(A),b:String(B)}; cust=w; setBtns(true); }
     else { vals[cust]=ans.value; cust=w; }
     ans.value=vals[w]; delete ans.dataset.bad;
-    say(w==='a'?'Змінюй ділене (до 7 цифр, не менше 20) і натисни Enter або ✔.':'Змінюй дільник від 2 до '+Math.floor(+vals.a/10)+' і натисни Enter або ✔.');
+    say(w==='a'?'Змінюй ділене (до 7 цифр, не менше 2) і натисни Enter або ✔.':'Змінюй дільник від 2 до '+(+vals.a)+' і натисни Enter або ✔.');
     renderCust(); focusEnd();
   }
   $('board').addEventListener('click',function(e){
@@ -845,11 +878,11 @@ if('serviceWorker' in navigator){
   window.custEnter=function(){
     if(!cust) return false;
     if(cust==='a'){ toB(true); return true; }
-    if(!(+vals.a>=20)){
+    if(!(+vals.a>=2)){
       vals.b=ans.value; cust='a'; ans.value=vals.a; delete ans.dataset.bad;
-      say('Спочатку введи ділене — не менше 20.','er'); renderCust(); focusEnd(); return true;
+      say('Спочатку введи ділене — не менше 2.','er'); renderCust(); focusEnd(); return true;
     }
-    var amax=Math.floor(+vals.a/10);
+    var amax=+vals.a;
     if(!(+ans.value>=2)||+ans.value>amax){ say('Дільник має бути від 2 до '+amax+'.','er'); return true; }
     vals.b=ans.value;
     var old=S;
@@ -861,16 +894,24 @@ if('serviceWorker' in navigator){
   $('ownBtn').addEventListener('click',function(){
     if(!cust) snapshot();
     vals={a:'',b:''}; cust='a'; ans.value=''; delete ans.dataset.bad; setBtns(true);
-    say('Введи ділене (до 7 цифр, не менше 20) і натисни Enter або ✔.'); renderCust();
+    say('Введи ділене (до 7 цифр, не менше 2) і натисни Enter або ✔.'); renderCust();
     try{ ans.focus(); }catch(e){}
   });
   $('new').addEventListener('click',function(){ if(cust){ cust=null; snap=null; setBtns(false); } });
-  function apply(v){
+  function refresh(){
+    var v=on(), m=mode(), bc=document.body.classList;
     if(!v&&cust) cancelCust();
-    document.body.classList.toggle('inline',v);
-    if(typeof S!=='undefined'&&S) draw();
+    bc.toggle('inline',v); bc.toggle('phone',v&&m==='phone'); bc.toggle('desk',v&&m==='desk');
+    ans.setAttribute('inputmode',v?'none':'numeric');
+    var kr=$('kpRow'), kn=$('kpNote');
+    if(kr) kr.style.display=(m==='desk')?'':'none';
+    if(kn) kn.style.display=(m==='desk')?'':'none';
+    var kon=false; try{ kon=localStorage.getItem('dilKeypad')==='1'; }catch(e){}
+    if(window.kpApply) window.kpApply(v&&m==='desk'&&kon);
+    if(cust) renderCust(); else if(typeof S!=='undefined'&&S) draw();
     try{ ans.focus(); }catch(e){}
   }
+  window.dilRefresh=refresh;
   ans.addEventListener('input',function(){
     if(!inl()) return;
     if(cust){ custInput(); return; }
@@ -904,9 +945,14 @@ if('serviceWorker' in navigator){
     ans.dispatchEvent(new Event('input',{bubbles:true}));
     try{ ans.focus(); }catch(x){}
   });
-  var gear=$('gearBtn'); if(gear) gear.addEventListener('click',function(){ tog.checked=on(); });
-  tog.addEventListener('change',function(){ try{ localStorage.setItem(KEY,tog.checked?'1':'0'); }catch(e){} apply(tog.checked); });
-  apply(on());
+  var gear=$('gearBtn'); if(gear) gear.addEventListener('click',function(){ tog.checked=on(); if(msel) msel.value=pref(); });
+  tog.addEventListener('change',function(){ try{ localStorage.setItem(KEY,tog.checked?'1':'0'); }catch(e){} refresh(); });
+  if(msel) msel.addEventListener('change',function(){ try{ localStorage.setItem(MKEY,msel.value); }catch(e){} refresh(); });
+  function toDesk(){ if(pref()==='auto'&&detected==='phone'){ detected='desk'; refresh(); } }
+  document.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse') toDesk(); },{passive:true});
+  document.addEventListener('keydown',function(e){ if(/^[0-9]$/.test(e.key)||e.key==='Enter'||e.key==='Backspace'||e.key==='Escape') toDesk(); },true);
+  window.custCancel=cancelCust;
+  refresh();
 })();
 </script>
 </body></html>
