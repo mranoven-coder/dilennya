@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.61 (04.10.2026)
+  Ділення стовпчиком — тренажер — v1.62 (05.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.61">
+<meta name="version" content="1.62">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.61"
+  "softwareVersion": "1.62"
 }
 </script>
 
@@ -161,7 +161,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.61</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.62</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -202,7 +202,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.61 · 04.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.62 · 05.10.2026</p>
 </section>
 </main>
 
@@ -471,6 +471,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.62", date:"05.10.2026",
+      items:[
+        "Свій приклад: дотик по числу, яке зараз вводиться, підтверджує його (як ✔): дотик по діленому — ділене стабілізується й починає блимати дільник; дотик по дільнику — дільник стабілізується й починається ділення"
+      ]
+    },
     {
       version:"1.61", date:"04.10.2026",
       items:[
@@ -883,9 +889,15 @@ if('serviceWorker' in navigator){
     ans.value=vals.b; delete ans.dataset.bad;
     say(t); renderCust(); focusEnd(); return true;
   }
+  var lastEdit=0;
   function editNum(w){
     if(window.dbg) window.dbg('editNum('+w+') cust='+cust);
-    if(cust&&cust===w){ focusEnd(); return; }
+    var now=Date.now(); if(now-lastEdit<500) return; lastEdit=now;
+    if(cust&&cust===w){
+      if(w==='a') toB(true);
+      else window.custEnter();
+      return;
+    }
     if(cust==='a'&&w==='b'){ toB(false); return; }
     if(!cust){ snapshot(); vals={a:String(A),b:String(B)}; cust=w; setBtns(true); }
     else { vals[cust]=ans.value; cust=w; }
@@ -994,7 +1006,7 @@ if('serviceWorker' in navigator){
     var dbgEl=document.createElement('div'), dl=[];
     dbgEl.style.cssText='position:fixed;left:0;right:0;top:0;z-index:300;background:rgba(0,0,0,.85);color:#7CFC00;font:11px/1.35 monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';
     document.body.appendChild(dbgEl);
-    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.61 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
+    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.62 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
     ['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click'].forEach(function(t){
       document.addEventListener(t,function(e){
         var el=e.target, de=(el&&el.getAttribute&&el.getAttribute('data-edit'))||'';
