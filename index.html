@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.6 (04.10.2026)
+  Ділення стовпчиком — тренажер — v1.61 (04.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.6">
+<meta name="version" content="1.61">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.6"
+  "softwareVersion": "1.61"
 }
 </script>
 
@@ -128,7 +128,17 @@ small{color:var(--mu)}
 .size-btn{flex:1;padding:8px 4px;font-size:0.9rem;background:var(--card);color:var(--pr);border:2px solid var(--pr)}
 .size-btn.active{background:var(--pr);color:#fff}
 [hidden]{display:none !important}
-#ownBtn{display:none}body.inline #ownBtn{display:inline-block}body.inline .ed{cursor:pointer;border-radius:6px}body.inline .ed:hover{background:rgba(74,127,214,.22)}body.inline #ownRow{display:none}
+#ownBtn{display:none}body.inline #ownBtn{display:inline-block}body.inline .ed{cursor:pointer;border-radius:6px}
+@media (hover:hover){body.inline .ed:hover{background:rgba(74,127,214,.22)}}
+body.touch .wrap.cm{align-items:stretch}
+body.touch .wrap.cm>pre:first-child{position:relative}
+body.touch .wrap.cm>pre:first-child::before{content:'';position:absolute;top:-10px;bottom:-10px;left:-60px;right:0}
+body.touch .wrap.cm>pre{-webkit-tap-highlight-color:transparent}
+body.phone .ed,body.touch.inline .ed{position:relative;-webkit-tap-highlight-color:transparent}
+body.phone .ed::after,body.touch.inline .ed::after{content:'';position:absolute;top:-10px;bottom:-10px;left:-6px;right:-6px}
+body.phone .ed.empty,body.touch.inline .ed.empty{display:inline-block;min-width:2.4ch;min-height:1.2em;background:rgba(74,127,214,.12)}
+body.phone .ed.act,body.touch.inline .ed.act{background:rgba(74,127,214,.28)}
+body.phone .bd.ed.empty,body.touch.inline .bd.ed.empty{display:block}body.inline #ownRow{display:none}
 #pad{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--card);border-top:2px solid var(--pr);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 16px rgba(0,0,0,.3);user-select:none;touch-action:manipulation}
 body.inline.phone #pad{display:block}
 body.inline.phone{padding-bottom:210px}
@@ -140,6 +150,8 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 .ty{color:var(--ok)}.bad{color:var(--er)!important}
 .dot{display:inline-block;width:0;overflow:visible;animation:bl 1s steps(1) infinite}
 .blink{animation:bl 1s steps(1) infinite}
+.cd{animation:bc 1s steps(1) infinite}
+@keyframes bc{50%{opacity:.25}}
 @keyframes bl{50%{opacity:0}}
 #kp{position:fixed;z-index:90;width:176px;background:var(--card);color:var(--tx);border:2px solid var(--pr);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35);user-select:none;touch-action:none}
 #kp[hidden]{display:none}
@@ -149,7 +161,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.6</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.61</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -190,7 +202,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.6 · 04.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.61 · 04.10.2026</p>
 </section>
 </main>
 
@@ -359,7 +371,7 @@ function draw(){
  let top=' <span class="ed" data-edit="a"'+(document.body.classList.contains('inline')?' title="Натисни, щоб змінити"':'')+'>'+[...ds].map((c,i)=>{
   const cls=(!done&&i<hi&&i>=(k==0?0:hi-1))?(k==0?'hl':'dn'):'';return cls?`<span class="${cls}">${c}</span>`:c}).join('')+'</span>';
  let rows=[top];
- const inl=document.body.classList.contains('inline')&&!done,an=$('ans'),tv=inl?an.value:'',bad=inl&&an.dataset.bad?' bad':'',cr=inl&&!bad?'<span class="dot">·</span>':'';
+ const inl=document.body.classList.contains('inline')&&!done,an=$('ans'),tv=inl?an.value:'',bad=inl&&an.dataset.bad?' bad':'',cr=inl&&!bad?'<span class="dot">·</span>':'',cd=v=>inl&&!bad&&v?v.slice(0,-1)+'<span class="cd">'+v.slice(-1)+'</span>':v;
  const upto=done?S.length:k;
  for(let i=0;i<=Math.min(upto,S.length-1);i++){
   const s=S[i],e=s.n-1;
@@ -368,15 +380,15 @@ function draw(){
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
   if(inl&&i==k){
-   if(ph==1){rows.push(tv?' '.repeat(Math.max(0,e+1-tv.length))+'<span class="pd ul'+bad+'">−'+tv+cr+'</span>':' '.repeat(e+1)+cr)}
-   else if(ph==2){rows.push(tv?'<span class="ty'+bad+'">'+pad(tv,e,1)+cr+'</span>':' '.repeat(e+1)+cr)}
+   if(ph==1){rows.push(tv?' '.repeat(Math.max(0,e+1-tv.length))+'<span class="pd ul'+bad+'">−'+cd(tv)+'</span>':' '.repeat(e+1)+cr)}
+   else if(ph==2){rows.push(tv?'<span class="ty'+bad+'">'+' '.repeat(Math.max(0,e+2-tv.length))+cd(tv)+'</span>':' '.repeat(e+1)+cr)}
   }
  }
  if(done){const s=S[S.length-1],ln='<span style="color:var(--ok)">'+pad(String(s.r),s.n-1,1)+'</span>';
   if(s.q===0&&S.length>1)rows[rows.length-1]=ln;else rows.push(ln)}
  let q='';for(let i=0;i<S.length;i++){
   if(i<k||done||(i==k&&ph>=1))q+=S[i].q;
-  else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+tv+'</span>':'<span class="ty blink">·</span>';
+  else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+cd(tv)+'</span>':'<span class="ty blink">·</span>';
   else q+='<span class="qq">·</span>'}
  $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd ed" data-edit="b"${(document.body.classList.contains('inline')?' title="Натисни, щоб змінити"':'')}>${B}</span><div class="q">${q}</div></pre></div>`}
 function ask(){
@@ -459,6 +471,13 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.61", date:"04.10.2026",
+      items:[
+        "Курсор при введенні: блимає остання набрана цифра (а в порожньому полі — крапка), тож завжди видно, куди продовжиться набір",
+        "Телефон, планшет і будь-який сенсорний екран (зокрема планшет із клавіатурою чи мишею): ділене й дільник легше активувати дотиком — більша зона дотику, видимі порожні місця й рамка навколо активного числа; під час введення свого прикладу ліва половина дошки активує ділене, а права — дільник; прибрано підсвічування, що «застрягало» після дотику"
+      ]
+    },
     {
       version:"1.6", date:"04.10.2026",
       items:[
@@ -809,6 +828,7 @@ if('serviceWorker' in navigator){
   row.style.display=''; if(note) note.style.display='';
   var KEY='dilInline', MKEY='dilMode', msel=$('modeSel');
   var finePtr=!!(window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches), detected=finePtr?'desk':'phone';
+  var touchCap=!!((window.matchMedia&&window.matchMedia('(any-pointer: coarse)').matches)||(navigator.maxTouchPoints>0));
   function pref(){ try{ return localStorage.getItem(MKEY)||'auto'; }catch(e){ return 'auto'; } }
   function mode(){ var p=pref(); return p==='auto'?detected:p; }
   function on(){ try{ return localStorage.getItem(KEY)!=='0'; }catch(e){ return true; } }
@@ -830,9 +850,11 @@ if('serviceWorker' in navigator){
   }
   function renderCust(){
     var da=cust==='a'?ans.value:vals.a, db=cust==='b'?ans.value:vals.b;
-    var left=' <span class="ed" data-edit="a"'+EDT+'>'+((da+(cust==='a'?(da?dotz:blk):''))||'&nbsp;')+'</span>';
-    var right='<span class="bd ed" data-edit="b"'+EDT+'>'+((db+(cust==='b'?(db?dotz:blk):''))||'&nbsp;')+'</span><div class="q">&nbsp;</div>';
-    $('board').innerHTML='<div class="wrap"><pre>'+left+'</pre><pre class="dv">'+right+'</pre></div>';
+    function fld(v,act){ return act?(v?v.slice(0,-1)+'<span class="cd">'+v.slice(-1)+'</span>':blk):(v||'&nbsp;'); }
+    function cl(v,act){ return (act?' act':'')+(v?'':' empty'); }
+    var left=' <span class="ed'+cl(da,cust==='a')+'" data-edit="a"'+EDT+'>'+fld(da,cust==='a')+'</span>';
+    var right='<span class="bd ed'+cl(db,cust==='b')+'" data-edit="b"'+EDT+'>'+fld(db,cust==='b')+'</span><div class="q">&nbsp;</div>';
+    $('board').innerHTML='<div class="wrap cm"><pre data-edit="a">'+left+'</pre><pre class="dv" data-edit="b">'+right+'</pre></div>';
   }
   function custInput(){
     var v=ans.value.replace(/\D/g,'').replace(/^0+/,'').slice(0,7), rej=false;
@@ -862,6 +884,7 @@ if('serviceWorker' in navigator){
     say(t); renderCust(); focusEnd(); return true;
   }
   function editNum(w){
+    if(window.dbg) window.dbg('editNum('+w+') cust='+cust);
     if(cust&&cust===w){ focusEnd(); return; }
     if(cust==='a'&&w==='b'){ toB(false); return; }
     if(!cust){ snapshot(); vals={a:String(A),b:String(B)}; cust=w; setBtns(true); }
@@ -874,6 +897,17 @@ if('serviceWorker' in navigator){
     if(!inl()) return;
     var t=e.target.closest&&e.target.closest('[data-edit]');
     if(t) editNum(t.getAttribute('data-edit'));
+  });
+  var tdown=null;
+  $('board').addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse'){ tdown=null; return; }
+    var t=e.target.closest&&e.target.closest('[data-edit]');
+    tdown=t?{x:e.clientX,y:e.clientY,w:t.getAttribute('data-edit')}:null;
+  });
+  $('board').addEventListener('pointerup',function(e){
+    if(!tdown||!inl()||e.pointerType==='mouse') return;
+    var d=tdown; tdown=null;
+    if(Math.abs(e.clientX-d.x)<10&&Math.abs(e.clientY-d.y)<10) editNum(d.w);
   });
   window.custEnter=function(){
     if(!cust) return false;
@@ -901,7 +935,7 @@ if('serviceWorker' in navigator){
   function refresh(){
     var v=on(), m=mode(), bc=document.body.classList;
     if(!v&&cust) cancelCust();
-    bc.toggle('inline',v); bc.toggle('phone',v&&m==='phone'); bc.toggle('desk',v&&m==='desk');
+    bc.toggle('inline',v); bc.toggle('phone',v&&m==='phone'); bc.toggle('desk',v&&m==='desk'); bc.toggle('touch',touchCap);
     ans.setAttribute('inputmode',v?'none':'numeric');
     var kr=$('kpRow'), kn=$('kpNote');
     if(kr) kr.style.display=(m==='desk')?'':'none';
@@ -949,9 +983,27 @@ if('serviceWorker' in navigator){
   tog.addEventListener('change',function(){ try{ localStorage.setItem(KEY,tog.checked?'1':'0'); }catch(e){} refresh(); });
   if(msel) msel.addEventListener('change',function(){ try{ localStorage.setItem(MKEY,msel.value); }catch(e){} refresh(); });
   function toDesk(){ if(pref()==='auto'&&detected==='phone'){ detected='desk'; refresh(); } }
-  document.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse') toDesk(); },{passive:true});
+  var mvCount=0;
+  document.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||Math.abs(e.movementX||0)+Math.abs(e.movementY||0)<2) return;
+    if(++mvCount>=3) toDesk();
+  },{passive:true});
   document.addEventListener('keydown',function(e){ if(/^[0-9]$/.test(e.key)||e.key==='Enter'||e.key==='Backspace'||e.key==='Escape') toDesk(); },true);
   window.custCancel=cancelCust;
+  if(/[?&]debug\b/.test(location.search)){
+    var dbgEl=document.createElement('div'), dl=[];
+    dbgEl.style.cssText='position:fixed;left:0;right:0;top:0;z-index:300;background:rgba(0,0,0,.85);color:#7CFC00;font:11px/1.35 monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';
+    document.body.appendChild(dbgEl);
+    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.61 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
+    ['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click'].forEach(function(t){
+      document.addEventListener(t,function(e){
+        var el=e.target, de=(el&&el.getAttribute&&el.getAttribute('data-edit'))||'';
+        window.dbg(t+' '+(e.pointerType||'')+' <'+(el&&el.tagName)+'>'+(de?' edit='+de:''));
+      },true);
+    });
+    window.addEventListener('error',function(e){ window.dbg('ERROR '+e.message); });
+    window.dbg('ready');
+  }
   refresh();
 })();
 </script>
