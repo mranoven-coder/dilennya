@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.63 (05.10.2026)
+  Ділення стовпчиком — тренажер — v1.65 (05.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.63">
+<meta name="version" content="1.65">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.63"
+  "softwareVersion": "1.65"
 }
 </script>
 
@@ -161,7 +161,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.63</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.65</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -202,7 +202,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.63 · 05.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.65 · 05.10.2026</p>
 </section>
 </main>
 
@@ -345,7 +345,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 
 <script>
 const $=id=>document.getElementById(id);
-let A,B,S,k,ph,mist,done,hintOn,sub=[];
+let A,B,S,k,ph,mist,done,hintOn,sub=[],mul=[];
 const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 let A0,D0;
 function newTask(){let t=0;do{gen()}while(Math.floor(A0/D0)<10&&++t<300);start(A0,D0)}
@@ -362,7 +362,7 @@ function start(a,d){
  S=[];
  for(;;){const q=Math.floor(cur/d);S.push({cur,n,q,p:q*d,r:cur%d});
   if(n>=ds.length)break;cur=(cur%d)*10+ +ds[n];n++}
- k=0;ph=0;mist=0;done=false;hintOn=false;sub=[];$('a').value=A;$('b').value=B;draw();ask()}
+ k=0;ph=0;mist=0;done=false;hintOn=false;sub=[];mul=[];$('a').value=A;$('b').value=B;draw();ask()}
 function pad(s,end,extra=0){return ' '.repeat(Math.max(0,end+1-s.length+extra))+s}
 function draw(){
  const ds=String(A),cs=S[Math.min(k,S.length-1)];
@@ -380,7 +380,8 @@ function draw(){
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
   if(inl&&i==k){
-   if(ph==1){rows.push(tv?' '.repeat(Math.max(0,e+1-tv.length))+'<span class="pd ul'+bad+'">−'+cd(tv)+'</span>':' '.repeat(e+1)+cr)}
+   if(ph==1){const tl=mul.slice().reverse().join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
+    rows.push(' '.repeat(Math.max(0,e+1-tl.length-(tv?tv.length:1)))+'<span class="pd ul'+bad+'">−'+cc+tl+'</span>')}
    else if(ph==2){const tl=sub.slice().reverse().join(''),cc=tv?'<span class="ty'+bad+'">'+cd(tv)+'</span>':'<span class="blink">·</span>';
     rows.push(' '.repeat(Math.max(0,e+2-1-tl.length))+cc+tl)}
    else if(false){rows.push(tv?'<span class="ty'+bad+'">'+' '.repeat(Math.max(0,e+2-tv.length))+cd(tv)+'</span>':' '.repeat(e+1)+cr)}
@@ -397,6 +398,24 @@ function colMode(){return document.body.classList.contains('inline')&&!done}
 function colInfo(){const s=S[k],c=String(s.cur),p=String(s.p).padStart(c.length,'0'),cols=[];let lent=0;
  for(let j=0;j<c.length;j++){const ci=+c[c.length-1-j],pi=+p[c.length-1-j],v=ci-lent,b=v<pi?1:0,e=v+10*b;cols.push({e,p:pi,b,r:e-pi});lent=b}
  return {cols,nd:String(s.r).length}}
+function mulInfo(){const q=S[k].q,ds=String(B),cols=[];let c=0;
+ for(let j=0;j<ds.length;j++){const d=+ds[ds.length-1-j],val=q*d+c,last=j==ds.length-1,ex=`${q} × ${d}${c?' + '+c:''}`;
+  if(last&&val>=10){cols.push({ex,val,last,kind:'u',w:String(val%10)});cols.push({ex,val,last,kind:'t',w:String(Math.floor(val/10))})}
+  else cols.push({ex,val,last,kind:'d',w:last?String(val):String(val%10)});
+  c=Math.floor(val/10)}
+ return {cols,nd:cols.length}}
+function mulPrompt(){const x=mulInfo().cols[mul.length];
+ if(x.kind=='t')return `Лівіше пишемо десятки: ${x.ex} = ${x.val}. Яка це цифра?`;
+ return (mul.length==0?`Помножимо стовпчиком ${S[k].q} × ${B}, цифри справа наліво. `:'')+x.ex+' = ?'+(x.last?' (останній стовпчик — пиши по цифрах справа)':' (пиши цифру одиниць)')}
+function mulCheck(v){
+ const m=$('msg'),x=mulInfo().cols[mul.length],an=$('ans');
+ if(v===x.w){mul.push(x.w);
+  if(mul.length<mulInfo().nd){draw();ask();const cr=Math.floor(x.val/10);m.className='ok';
+   m.textContent=`✅ ${x.ex} = ${x.val}: пишемо ${x.w}${x.kind=='u'?', а '+cr+' — лівіше':(cr?', '+cr+' переносимо':'')}. `+m.textContent;return}
+  mul=[];ph=2;draw();ask();m.className='ok';m.textContent='✅ Правильно! '+m.textContent;return}
+ mist++;m.className='er';m.textContent=`❌ Ще раз: ${x.ex} = ?`;
+ const sh=$('board');sh.classList.remove('shake');void sh.offsetWidth;sh.classList.add('shake');an.select();an.dataset.bad='1';draw()}
+function colLen(){return colMode()?1:0}
 function subPrompt(){const s=S[k],x=colInfo().cols[sub.length];
  return (sub.length==0?`Віднімемо стовпчиком ${s.cur} − ${s.p}, цифри справа наліво. `:'')+`${x.e} − ${x.p} = ?`+(x.b?' (позичили десяток)':'')}
 function colCheck(v){
@@ -411,13 +430,14 @@ function colCheck(v){
 function ask(){
  const s=S[k],m=$('msg');m.className='';
  const t=[`Скільки разів ${B} вміщується в ${s.cur}? (Яка цифра в частці?)`,
-  `Перемнож: ${s.q} × ${B} = ?`,ph==2&&colMode()?subPrompt():`Віднімемо: ${s.cur} − ${s.p} = ?`][ph];
- if(ph<2)sub=[];
+  ph==1&&colMode()?mulPrompt():`Перемнож: ${s.q} × ${B} = ?`,ph==2&&colMode()?subPrompt():`Віднімемо: ${s.cur} − ${s.p} = ?`][ph];
+ if(ph<2)sub=[];if(ph==0)mul=[];
  m.textContent=(k>0&&ph==0?`Зносимо цифру ${String(s.cur).slice(-1)}. `:'')+t;
  $('ans').value='';delete $('ans').dataset.bad;$('ans').focus();if(document.body.classList.contains('inline'))draw()}
 function hint(){
  const s=S[k];let h='';
  if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
+ else if(ph==1&&colMode())h=`Множ по цифрах справа. Пиши цифру одиниць, а десятки переноси в наступний стовпчик: ${mulInfo().cols[mul.length].ex}.`;
  else if(ph==1)h=`Рахуй по частинах: ${B} × ${s.q}.`;
  else if(colMode()){const x=colInfo().cols[sub.length];h=`Віднімай по цифрах справа. ${x.b?'Верхня цифра менша — позич десяток: ':''}${x.e} − ${x.p}.`}
  else h=`Пиши число під числом і віднімай: ${s.cur} − ${s.p}. Остача має бути менша за ${B}.`;
@@ -427,6 +447,7 @@ function check(){
  if(window.custEnter&&window.custEnter())return;
  if(done)return;const v=$('ans').value.trim();if(v==='')return;
  if(ph==2&&colMode()){colCheck(v);return}
+ if(ph==1&&colMode()){mulCheck(v);return}
  const g=+v,s=S[k],m=$('msg');
  if(g===correct()){
   m.className='ok';
@@ -445,7 +466,7 @@ function finish(){
  $('msg').innerHTML=`🎉 Готово! ${A} : ${B} = ${q}${s.r?` (остача ${s.r})`:''}<br>Перевірка: ${q} × ${B}${s.r?' + '+s.r:''} = ${+q*B+s.r} ${st}`}
 $('ok').onclick=check;$('ans').onkeydown=e=>{if(e.key==='Enter')check()};
 $('hint').onclick=()=>!done&&hint();
-$('show').onclick=()=>{if(done)return;mist++;$('ans').value=(ph==2&&colMode())?colInfo().cols[sub.length].r:correct();check()};
+$('show').onclick=()=>{if(done)return;mist++;$('ans').value=(ph==2&&colMode())?colInfo().cols[sub.length].r:(ph==1&&colMode())?mulInfo().cols[mul.length].w:correct();check()};
 $('new').onclick=newTask;
 $('own').onclick=()=>start(+$('a').value,+$('b').value);
 $('a').onkeydown=$('b').onkeydown=e=>{if(e.key==='Enter')$('own').click()};
@@ -492,6 +513,18 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.65", date:"05.10.2026",
+      items:[
+        "Множення стовпчиком: в останньому стовпчику двоцифровий результат тепер теж вводиться по цифрах справа наліво (3 × 7 = 21: спочатку 1 під попередньою цифрою, потім 2 лівіше)"
+      ]
+    },
+    {
+      version:"1.64", date:"05.10.2026",
+      items:[
+        "Множення при діленні теж стовпчиком, як у зошиті: цифри добутку вводяться по одній справа наліво, десятки переносяться в наступний стовпчик (3 × 2, потім 3 × 3, потім 3 × 7 = 21)"
+      ]
+    },
     {
       version:"1.63", date:"05.10.2026",
       items:[
@@ -990,12 +1023,12 @@ if('serviceWorker' in navigator){
     if(cust){ custInput(); return; }
     if(done) return;
     var v=ans.value.replace(/\D/g,'');
-    var one=(ph===0||(ph===2&&colMode()));
-    v = one ? v.slice(-1) : v.slice(0,7);
+    var n=colLen();
+    v = n ? v.slice(-n) : v.slice(0,7);
     if(v!==ans.value) ans.value=v;
     delete ans.dataset.bad;
     draw();
-    if(v.length===(one?1:String(correct()).length)) check();
+    if(v.length===(n||String(correct()).length)) check();
   });
   document.addEventListener('keydown',function(e){
     if(cust&&inl()&&e.key==='Escape'){ cancelCust(); e.preventDefault(); return; }
@@ -1034,7 +1067,7 @@ if('serviceWorker' in navigator){
     var dbgEl=document.createElement('div'), dl=[];
     dbgEl.style.cssText='position:fixed;left:0;right:0;top:0;z-index:300;background:rgba(0,0,0,.85);color:#7CFC00;font:11px/1.35 monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';
     document.body.appendChild(dbgEl);
-    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.63 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
+    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.65 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
     ['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click'].forEach(function(t){
       document.addEventListener(t,function(e){
         var el=e.target, de=(el&&el.getAttribute&&el.getAttribute('data-edit'))||'';
