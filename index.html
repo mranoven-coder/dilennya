@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.66 (05.10.2026)
+  Ділення стовпчиком — тренажер — v1.67 (06.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.66">
+<meta name="version" content="1.67">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.66"
+  "softwareVersion": "1.67"
 }
 </script>
 
@@ -161,7 +161,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.66</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.67</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -202,7 +202,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.66 · 05.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.67 · 06.10.2026</p>
 </section>
 </main>
 
@@ -213,7 +213,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
     <ol>
       <li>Обери рівень складності або введи своє ділене й дільник.</li>
       <li>Вгадай цифру частки — якщо не підходить, тренажер підкаже «забагато» чи «замало».</li>
-      <li>Помнож і відніми — так само крок за кроком, поки приклад не буде розв'язано.</li>
+      <li>Помнож і відніми — так само крок за кроком, цифри пиши справа наліво, як у зошиті, поки приклад не буде розв'язано.</li>
       <li>💡 «Підказка» — безкоштовна допомога; 👀 «Показати відповідь» — готова відповідь (зі штрафом до зірочок).</li>
       <li>⚙ — тут можна вимкнути ці підказки, збільшити цифри або заборонити кнопку «Показати відповідь»; на комп'ютері — ввімкнути екранну клавіатуру з цифрами.</li>
     </ol>
@@ -233,9 +233,10 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
       <li><b>Рівень складності</b> — від «2 цифри ÷ 1 цифру» до «3–4 цифри ÷ 2 цифри».</li>
       <li><b>З остачею</b> — галочка вмикає приклади з остачею; без неї числа завжди діляться рівно.</li>
       <li><b>Нове завдання</b> — генерує випадковий приклад обраної складності.</li>
-      <li><b>Своє</b> — можна ввести власне ділене й дільник. Натисни «✏️ Своє» (або клікни по числу на дошці), набери ділене й ✔ (Enter), потім дільник і ✔; Esc або ✕ — скасувати.</li>
+      <li><b>Своє</b> — можна ввести власне ділене й дільник. Натисни «✏️ Своє» (або клікни по числу на дошці), набери ділене й ✔ (Enter), потім дільник і ✔; Esc або ✕ — скасувати. Замість ✔ можна торкнутись пальцем (або клікнути мишею) самого числа, яке набираєш: воно підтвердиться й почнеться наступний крок.</li>
+      <li><b>Множення і віднімання по цифрах</b> — як у зошиті: цифри пишуться справа наліво. У множенні десятки переносяться в наступний стовпчик, у відніманні підказка показує позичання десятка (наприклад, 14 − 8, потім 11 − 3).</li>
       <li><b>💡 Підказка</b> — підказує без штрафу (таблиця множення, порада щодо множення чи віднімання).</li>
-      <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки. Цю кнопку можна вимкнути в ⚙.</li>
+      <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки (у множенні та відніманні по цифрах — одну помилку на крок, а не на кожну цифру). Цю кнопку можна вимкнути в ⚙.</li>
       <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь», екранна клавіатура (на комп'ютері).</li>
       <li><b>⌨ Екранна клавіатура</b> (режим «Комп'ютер») — вікно з цифрами для вводу мишею; його можна перетягувати. Вмикається в ⚙, за замовчуванням вимкнена.</li>
       <li><b>📱 Телефон</b> — цифри вводяться панеллю внизу екрана. У ⚙ «Режим введення» можна обрати «Авто», «Комп'ютер» чи «Телефон».</li>
@@ -345,7 +346,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 
 <script>
 const $=id=>document.getElementById(id);
-let A,B,S,k,ph,mist,done,hintOn,sub=[],mul=[];
+let A,B,S,k,ph,mist,done,hintOn,sub=[],mul=[],shn={};
 const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 let A0,D0;
 function newTask(){let t=0;do{gen()}while(Math.floor(A0/D0)<10&&++t<300);start(A0,D0)}
@@ -362,7 +363,7 @@ function start(a,d){
  S=[];
  for(;;){const q=Math.floor(cur/d);S.push({cur,n,q,p:q*d,r:cur%d});
   if(n>=ds.length)break;cur=(cur%d)*10+ +ds[n];n++}
- k=0;ph=0;mist=0;done=false;hintOn=false;sub=[];mul=[];$('a').value=A;$('b').value=B;draw();ask()}
+ k=0;ph=0;mist=0;done=false;hintOn=false;sub=[];mul=[];shn={};$('a').value=A;$('b').value=B;draw();ask()}
 function pad(s,end,extra=0){return ' '.repeat(Math.max(0,end+1-s.length+extra))+s}
 function draw(){
  const ds=String(A),cs=S[Math.min(k,S.length-1)];
@@ -384,7 +385,6 @@ function draw(){
     rows.push(' '.repeat(Math.max(0,e+1-tl.length-(tv?tv.length:1)))+'<span class="pd ul'+bad+'">−'+cc+tl+'</span>')}
    else if(ph==2){const tl=sub.slice().reverse().join(''),cc=tv?'<span class="ty'+bad+'">'+cd(tv)+'</span>':'<span class="blink">·</span>';
     rows.push(' '.repeat(Math.max(0,e+2-1-tl.length))+cc+tl)}
-   else if(false){rows.push(tv?'<span class="ty'+bad+'">'+' '.repeat(Math.max(0,e+2-tv.length))+cd(tv)+'</span>':' '.repeat(e+1)+cr)}
   }
  }
  if(done){const s=S[S.length-1],ln='<span style="color:var(--ok)">'+pad(String(s.r),s.n-1,1)+'</span>';
@@ -466,7 +466,7 @@ function finish(){
  $('msg').innerHTML=`🎉 Готово! ${A} : ${B} = ${q}${s.r?` (остача ${s.r})`:''}<br>Перевірка: ${q} × ${B}${s.r?' + '+s.r:''} = ${+q*B+s.r} ${st}`}
 $('ok').onclick=check;$('ans').onkeydown=e=>{if(e.key==='Enter')check()};
 $('hint').onclick=()=>!done&&hint();
-$('show').onclick=()=>{if(done)return;mist++;$('ans').value=(ph==2&&colMode())?colInfo().cols[sub.length].r:(ph==1&&colMode())?mulInfo().cols[mul.length].w:correct();check()};
+$('show').onclick=()=>{if(done)return;if(!(colMode()&&(ph==1||ph==2))||!shn[k+':'+ph]){mist++;shn[k+':'+ph]=1}$('ans').value=(ph==2&&colMode())?colInfo().cols[sub.length].r:(ph==1&&colMode())?mulInfo().cols[mul.length].w:correct();check()};
 $('new').onclick=newTask;
 $('lvl').onchange=$('rm').onchange=()=>$('new').click();
 $('own').onclick=()=>start(+$('a').value,+$('b').value);
@@ -514,6 +514,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.67", date:"06.10.2026",
+      items:[
+        "Швидкі дотики по різних числах більше не губляться (ігнорується лише повтор дотику по тому самому числу); «Показати відповідь» у множенні та відніманні по цифрах штрафує раз за крок; нові правила додано в «Інструкцію» та в підказки при запуску; прибрано службовий код діагностики й невикористаний код"
+      ]
+    },
     {
       version:"1.66", date:"05.10.2026",
       items:[
@@ -956,10 +962,9 @@ if('serviceWorker' in navigator){
     ans.value=vals.b; delete ans.dataset.bad;
     say(t); renderCust(); focusEnd(); return true;
   }
-  var lastEdit=0;
+  var lastEdit=0,lastW='';
   function editNum(w){
-    if(window.dbg) window.dbg('editNum('+w+') cust='+cust);
-    var now=Date.now(); if(now-lastEdit<500) return; lastEdit=now;
+    var now=Date.now(); if(w===lastW&&now-lastEdit<500) return; lastEdit=now; lastW=w;
     if(cust&&cust===w){
       if(w==='a') toB(true);
       else window.custEnter();
@@ -1070,20 +1075,6 @@ if('serviceWorker' in navigator){
   },{passive:true});
   document.addEventListener('keydown',function(e){ if(/^[0-9]$/.test(e.key)||e.key==='Enter'||e.key==='Backspace'||e.key==='Escape') toDesk(); },true);
   window.custCancel=cancelCust;
-  if(/[?&]debug\b/.test(location.search)){
-    var dbgEl=document.createElement('div'), dl=[];
-    dbgEl.style.cssText='position:fixed;left:0;right:0;top:0;z-index:300;background:rgba(0,0,0,.85);color:#7CFC00;font:11px/1.35 monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap';
-    document.body.appendChild(dbgEl);
-    window.dbg=function(t){ dl.push(t); if(dl.length>9) dl.shift(); dbgEl.textContent='DEBUG v1.66 · mode='+mode()+' · cust='+cust+'\n'+dl.join('\n'); };
-    ['pointerdown','pointerup','pointercancel','touchstart','touchend','touchcancel','click'].forEach(function(t){
-      document.addEventListener(t,function(e){
-        var el=e.target, de=(el&&el.getAttribute&&el.getAttribute('data-edit'))||'';
-        window.dbg(t+' '+(e.pointerType||'')+' <'+(el&&el.tagName)+'>'+(de?' edit='+de:''));
-      },true);
-    });
-    window.addEventListener('error',function(e){ window.dbg('ERROR '+e.message); });
-    window.dbg('ready');
-  }
   refresh();
 })();
 </script>
