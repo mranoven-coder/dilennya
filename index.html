@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.68 (06.10.2026)
+  Ділення стовпчиком — тренажер — v1.69 (06.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.68">
+<meta name="version" content="1.69">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.68"
+  "softwareVersion": "1.69"
 }
 </script>
 
@@ -163,7 +163,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.68</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.69</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -204,7 +204,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.68 · 06.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.69 · 06.10.2026</p>
 </section>
 </main>
 
@@ -215,7 +215,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
     <ol>
       <li>Обери рівень складності або введи своє ділене й дільник.</li>
       <li>Вгадай цифру частки — якщо не підходить, тренажер підкаже «забагато» чи «замало».</li>
-      <li>Помнож і відніми — так само крок за кроком, цифри пиши справа наліво, як у зошиті, поки приклад не буде розв'язано.</li>
+      <li>Помнож і відніми — так само крок за кроком, як у зошиті, поки приклад не буде розв'язано. Цифру на цифру множимо як є, зліва направо (5 × 9 = 45); якщо дільник має кілька цифр, пиши справа наліво.</li>
       <li>💡 «Підказка» — безкоштовна допомога; 👀 «Показати відповідь» — готова відповідь (зі штрафом до зірочок).</li>
       <li>⚙ — тут можна вимкнути ці підказки, збільшити цифри або заборонити кнопку «Показати відповідь»; на комп'ютері — ввімкнути екранну клавіатуру з цифрами.</li>
     </ol>
@@ -236,7 +236,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
       <li><b>З остачею</b> — галочка вмикає приклади з остачею; без неї числа завжди діляться рівно.</li>
       <li><b>Нове завдання</b> — генерує випадковий приклад обраної складності.</li>
       <li><b>Своє</b> — можна ввести власне ділене й дільник. Натисни «✏️ Своє» (або клікни по числу на дошці), набери ділене й ✔ (Enter), потім дільник і ✔; Esc або ✕ — скасувати. Замість ✔ можна торкнутись пальцем (або клікнути мишею) самого числа, яке набираєш: воно підтвердиться й почнеться наступний крок.</li>
-      <li><b>Множення і віднімання по цифрах</b> — як у зошиті: цифри пишуться справа наліво. У множенні десятки переносяться в наступний стовпчик, у відніманні підказка показує позичання десятка (наприклад, 14 − 8, потім 11 − 3).</li>
+      <li><b>Множення і віднімання по цифрах</b> — як у зошиті: цифри пишуться справа наліво. У множенні десятки переносяться в наступний стовпчик, у відніманні підказка показує позичання десятка (наприклад, 14 − 8, потім 11 − 3). Коли цифру множимо на одну цифру (5 × 9), результат пишеться як є, зліва направо: 4, потім 5.</li>
       <li><b>💡 Підказка</b> — підказує без штрафу (таблиця множення, порада щодо множення чи віднімання).</li>
       <li><b>👀 Показати відповідь</b> — одразу дає правильну цифру/число, але додає «помилку» до підсумкової оцінки (у множенні та відніманні по цифрах — одну помилку на крок, а не на кожну цифру). Цю кнопку можна вимкнути в ⚙.</li>
       <li><b>⚙ Налаштування</b> — підказки при запуску, розмір цифр, «не вимикати екран», кнопка «Показати відповідь», екранна клавіатура (на комп'ютері).</li>
@@ -386,7 +386,9 @@ function draw(){
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
   if(inl&&i==k){
-   if(ph==1){const tl=mul.slice().reverse().join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
+   if(ph==1&&mulInfo().cols[0].kind=='l'){const tl=mul.join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
+     rows.push(' '.repeat(Math.max(0,e-1))+'<span class="pd ul'+bad+'">−'+tl+cc+(tl?'':' ')+'</span>')}
+   else if(ph==1){const tl=mul.slice().reverse().join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
     rows.push(' '.repeat(Math.max(0,e+1-tl.length-(tv?tv.length:1)))+'<span class="pd ul'+bad+'">−'+cc+tl+'</span>')}
    else if(ph==2){const tl=sub.slice().reverse().join(''),cc=tv?'<span class="ty'+bad+'">'+cd(tv)+'</span>':'<span class="blink">·</span>';
     rows.push(' '.repeat(Math.max(0,e+2-1-tl.length))+cc+tl)}
@@ -398,25 +400,41 @@ function draw(){
   if(i<k||done||(i==k&&ph>=1))q+=S[i].q;
   else if(inl&&i==k&&ph==0)q+=tv?'<span class="ty'+bad+'">'+cd(tv)+'</span>':'<span class="ty blink">·</span>';
   else q+='<span class="qq">·</span>'}
- $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd ed" data-edit="b"${(document.body.classList.contains('inline')?' title="Натисни, щоб змінити"':'')}>${B}</span><div class="q">${q}</div></pre></div>`}
+ $('board').innerHTML=`<div class="wrap"><pre>${rows.join('\n')}</pre><pre class="dv"><span class="bd ed" data-edit="b"${(document.body.classList.contains('inline')?' title="Натисни, щоб змінити"':'')}>${B}</span><div class="q">${q}</div></pre></div>`;autoScrollSoon()}
+let scTimer=0;
+function autoScrollSoon(){clearTimeout(scTimer);scTimer=setTimeout(autoScroll,40)}
+function autoScroll(){
+ const w=document.querySelector('#board .wrap>pre');if(!w)return;
+ const pad=$('pad'),pv=pad&&getComputedStyle(pad).display!=='none',
+  bl=(pv?pad.getBoundingClientRect().top:innerHeight)-8,tl=8,
+  r=w.getBoundingClientRect(),lh=r.height/Math.max(1,w.textContent.split('\n').length),
+  ms=$('msg'),mb=ms?ms.getBoundingClientRect().bottom:0,nb=r.bottom-bl;
+ let d=0;
+ if(r.height<=bl-tl){const lt=r.top-tl;d=lt<0?lt:Math.max(0,Math.min(Math.max(nb,mb-bl),lt))}
+ else if(nb>0)d=nb;
+ else if(r.bottom-lh<tl)d=r.bottom-2*lh-tl;
+ if(Math.abs(d)>2)scrollTo({top:Math.max(0,scrollY+d),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
 function colMode(){return document.body.classList.contains('inline')&&!done}
 function colInfo(){const s=S[k],c=String(s.cur),p=String(s.p).padStart(c.length,'0'),cols=[];let lent=0;
  for(let j=0;j<c.length;j++){const ci=+c[c.length-1-j],pi=+p[c.length-1-j],v=ci-lent,b=v<pi?1:0,e=v+10*b;cols.push({e,p:pi,b,r:e-pi});lent=b}
  return {cols,nd:String(s.r).length}}
 function mulInfo(){const q=S[k].q,ds=String(B),cols=[];let c=0;
  for(let j=0;j<ds.length;j++){const d=+ds[ds.length-1-j],val=q*d+c,last=j==ds.length-1,ex=`${q} × ${d}${c?' + '+c:''}`;
-  if(last&&val>=10){cols.push({ex,val,last,kind:'u',w:String(val%10)});cols.push({ex,val,last,kind:'t',w:String(Math.floor(val/10))})}
+  if(last&&val>=10&&ds.length==1){cols.push({ex,val,last,kind:'l',w:String(Math.floor(val/10))});cols.push({ex,val,last,kind:'r',w:String(val%10)})}
+  else if(last&&val>=10){cols.push({ex,val,last,kind:'u',w:String(val%10)});cols.push({ex,val,last,kind:'t',w:String(Math.floor(val/10))})}
   else cols.push({ex,val,last,kind:'d',w:last?String(val):String(val%10)});
   c=Math.floor(val/10)}
  return {cols,nd:cols.length}}
 function mulPrompt(){const x=mulInfo().cols[mul.length];
+ if(x.kind=='l')return `Помножимо ${x.ex}. Результат пишемо як є, зліва направо: ${x.ex} = ? (спершу цифра десятків)`;
+ if(x.kind=='r')return `Далі пишемо цифру одиниць: ${x.ex} = ?`;
  if(x.kind=='t')return `Лівіше пишемо десятки: ${x.ex} = ${x.val}. Яка це цифра?`;
  return (mul.length==0?`Помножимо стовпчиком ${S[k].q} × ${B}, цифри справа наліво. `:'')+x.ex+' = ?'+(x.last?' (останній стовпчик — пиши по цифрах справа)':' (пиши цифру одиниць)')}
 function mulCheck(v){
  const m=$('msg'),x=mulInfo().cols[mul.length],an=$('ans');
  if(v===x.w){mul.push(x.w);
   if(mul.length<mulInfo().nd){draw();ask();const cr=Math.floor(x.val/10);m.className='ok';
-   m.textContent=`✅ ${x.ex} = ${x.val}: пишемо ${x.w}${x.kind=='u'?', а '+cr+' — лівіше':(cr?', '+cr+' переносимо':'')}. `+m.textContent;return}
+   m.textContent=(x.kind=='l'?`✅ Правильно, ${x.w} — цифра десятків. `:`✅ ${x.ex} = ${x.val}: пишемо ${x.w}${x.kind=='u'?', а '+cr+' — лівіше':(cr?', '+cr+' переносимо':'')}. `)+m.textContent;return}
   mul=[];ph=2;draw();ask();m.className='ok';m.textContent='✅ Правильно! '+m.textContent;return}
  mist++;m.className='er';m.textContent=`❌ Ще раз: ${x.ex} = ?`;
  const sh=$('board');sh.classList.remove('shake');void sh.offsetWidth;sh.classList.add('shake');an.select();an.dataset.bad='1';draw()}
@@ -442,7 +460,8 @@ function ask(){
 function hint(){
  const s=S[k];let h='';
  if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
- else if(ph==1&&colMode())h=`Множ по цифрах справа. Пиши цифру одиниць, а десятки переноси в наступний стовпчик: ${mulInfo().cols[mul.length].ex}.`;
+ else if(ph==1&&colMode()&&mulInfo().cols[0].kind=='l'){const x=mulInfo().cols[mul.length];h=x.kind=='l'?`Помнож ${x.ex}. Результат пиши як є, зліва направо: спочатку цифра десятків.`:`Тепер цифра одиниць результату ${x.ex}.`}
+  else if(ph==1&&colMode())h=`Множ по цифрах справа. Пиши цифру одиниць, а десятки переноси в наступний стовпчик: ${mulInfo().cols[mul.length].ex}.`;
  else if(ph==1)h=`Рахуй по частинах: ${B} × ${s.q}.`;
  else if(colMode()){const x=colInfo().cols[sub.length];h=`Віднімай по цифрах справа. ${x.b?'Верхня цифра менша — позич десяток: ':''}${x.e} − ${x.p}.`}
  else h=`Пиши число під числом і віднімай: ${s.cur} − ${s.p}. Остача має бути менша за ${B}.`;
@@ -519,6 +538,13 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.69", date:"06.10.2026",
+      items:[
+        "Множення цифри на цифру (наприклад, 5 × 9) тепер пишеться як є, зліва направо: спочатку 4, потім 5, а риска стоїть під обома цифрами; якщо дільник має кілька цифр, множення стовпчиком справа наліво не змінилось",
+        "Сторінка сама прокручується, щоб активний рядок запису й підказка завжди були видні над панеллю цифр (раніше їх доводилося піднімати пальцем)"
+      ]
+    },
     {
       version:"1.68", date:"06.10.2026",
       items:[
