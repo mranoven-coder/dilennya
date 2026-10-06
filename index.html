@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.67 (06.10.2026)
+  Ділення стовпчиком — тренажер — v1.68 (06.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.67">
+<meta name="version" content="1.68">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.67"
+  "softwareVersion": "1.68"
 }
 </script>
 
@@ -58,11 +58,13 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<script>try{var t=localStorage.getItem('dilTheme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>
 :root{--bg:#eef4ff;--card:#fff;--tx:#1d2a44;--mu:#5b6b8c;--pr:#4a7fd6;--ok:#2e9e5b;--er:#d64a4a;--or:#f08a1c;--hl:#fff1d6;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a2a;--card:#1f2740;--tx:#eaf0ff;--mu:#9fb0d3;--hl:#3a3320}}
-:root[data-theme="dark"]{--bg:#141a2a;--card:#1f2740;--tx:#eaf0ff;--mu:#9fb0d3;--hl:#3a3320}
+:root[data-theme="dark"]{--bg:#141a2a;--card:#1f2740;--tx:#eaf0ff;--mu:#9fb0d3;--hl:#3a3320;color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;padding:16px}
 main{width:100%;max-width:560px}
@@ -161,7 +163,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.67</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.68</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -202,7 +204,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.67 · 06.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.68 · 06.10.2026</p>
 </section>
 </main>
 
@@ -323,6 +325,9 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 
     <label class="settings-row" id="modeRow"><span>Режим введення</span><select id="modeSel"><option value="auto">Авто</option><option value="desk">Комп'ютер</option><option value="phone">Телефон</option></select></label>
     <p class="settings-note">«Авто» сам вибирає за пристроєм: телефон показує панель цифр унизу екрана, а комп'ютер чи планшет із мишею або клавіатурою працює як комп'ютер.</p>
+
+    <label class="settings-row"><span>Тема</span><select id="themeSel"><option value="auto">Як на пристрої</option><option value="light">Світла</option><option value="dark">Темна</option></select></label>
+    <p class="settings-note">«Як на пристрої» — світла чи темна залежно від налаштувань телефона або комп'ютера.</p>
   </div>
 </div>
 
@@ -514,6 +519,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.68", date:"06.10.2026",
+      items:[
+        "У ⚙ «Налаштування» з'явився вибір теми: «Як на пристрої» (за замовчуванням, як було досі), «Світла» або «Темна»"
+      ]
+    },
     {
       version:"1.67", date:"06.10.2026",
       items:[
@@ -1076,6 +1087,20 @@ if('serviceWorker' in navigator){
   document.addEventListener('keydown',function(e){ if(/^[0-9]$/.test(e.key)||e.key==='Enter'||e.key==='Backspace'||e.key==='Escape') toDesk(); },true);
   window.custCancel=cancelCust;
   refresh();
+})();
+</script>
+<script>
+(function(){
+  // Вибір теми: auto (за пристроєм) / light / dark
+  var K='dilTheme', s=document.getElementById('themeSel');
+  if(!s) return;
+  function get(){ try{ var v=localStorage.getItem(K); return (v==='light'||v==='dark')?v:'auto'; }catch(e){ return 'auto'; } }
+  function apply(v){
+    var r=document.documentElement;
+    if(v==='auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme',v);
+  }
+  apply(get()); s.value=get();
+  s.addEventListener('change',function(){ apply(s.value); try{ localStorage.setItem(K,s.value); }catch(e){} });
 })();
 </script>
 </body></html>
