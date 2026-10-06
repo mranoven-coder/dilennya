@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.69 (06.10.2026)
+  Ділення стовпчиком — тренажер — v1.70 (06.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.69">
+<meta name="version" content="1.70">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.69"
+  "softwareVersion": "1.70"
 }
 </script>
 
@@ -163,7 +163,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.69</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.70</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -180,7 +180,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 <div class="row" id="ownRow" style="margin-top:10px"><small>Своє:</small><input class="n" id="a" inputmode="numeric" placeholder="ділене"><b>:</b><input class="n" id="b" inputmode="numeric" placeholder="дільник"><button class="g" id="own">Почати</button></div></div>
 <div class="card"><div id="board"></div></div>
 <div class="card"><div id="msg"></div>
-<div class="row" id="ansRow"><input id="ans" inputmode="numeric" autocomplete="off"><button id="ok">Перевірити</button></div>
+<div class="row" id="ansRow"><input id="ans" inputmode="none" autocomplete="off"><button id="ok">Перевірити</button></div>
 <div class="row" style="margin-top:10px"><button class="g" id="hint">💡 Підказка</button><button class="g" id="show">👀 Показати відповідь</button></div></div>
 
 <div class="row bottom-actions">
@@ -204,7 +204,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.69 · 06.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.70 · 06.10.2026</p>
 </section>
 </main>
 
@@ -456,7 +456,7 @@ function ask(){
   ph==1&&colMode()?mulPrompt():`Перемнож: ${s.q} × ${B} = ?`,ph==2&&colMode()?subPrompt():`Віднімемо: ${s.cur} − ${s.p} = ?`][ph];
  if(ph<2)sub=[];if(ph==0)mul=[];
  m.textContent=(k>0&&ph==0?`Зносимо цифру ${String(s.cur).slice(-1)}. `:'')+t;
- $('ans').value='';delete $('ans').dataset.bad;$('ans').focus();if(document.body.classList.contains('inline'))draw()}
+ $('ans').value='';delete $('ans').dataset.bad;if(!document.body.classList.contains('phone'))$('ans').focus();if(document.body.classList.contains('inline'))draw()}
 function hint(){
  const s=S[k];let h='';
  if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
@@ -538,6 +538,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.70", date:"06.10.2026",
+      items:[
+        "Телефон: системна клавіатура більше не вискакує при запуску — поле відповіді з самого початку не викликає її, а в режимі «Телефон» фокус із нього знімається; цифри вводяться панеллю внизу екрана"
+      ]
+    },
     {
       version:"1.69", date:"06.10.2026",
       items:[
@@ -1064,7 +1070,7 @@ if('serviceWorker' in navigator){
     var kon=false; try{ kon=localStorage.getItem('dilKeypad')==='1'; }catch(e){}
     if(window.kpApply) window.kpApply(v&&m==='desk'&&kon);
     if(cust) renderCust(); else if(typeof S!=='undefined'&&S) draw();
-    try{ ans.focus(); }catch(e){}
+    try{ if(bc.contains('phone')) ans.blur(); else ans.focus(); }catch(e){}
   }
   window.dilRefresh=refresh;
   ans.addEventListener('input',function(){
