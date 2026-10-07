@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.71 (07.10.2026)
+  Ділення стовпчиком — тренажер — v1.72 (07.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.71">
+<meta name="version" content="1.72">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.71"
+  "softwareVersion": "1.72"
 }
 </script>
 
@@ -163,7 +163,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.71</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.72</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -204,7 +204,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.71 · 07.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.72 · 07.10.2026</p>
 </section>
 </main>
 
@@ -442,7 +442,7 @@ function mulCheck(v){
   mul=[];ph=2;draw();ask();m.className='ok';m.textContent='✅ Правильно! '+m.textContent;return}
  mist++;m.className='er';m.textContent=`❌ Ще раз: ${x.ex} = ?`;
  const sh=$('board');sh.classList.remove('shake');void sh.offsetWidth;sh.classList.add('shake');an.select();an.dataset.bad='1';draw()}
-function colLen(){return colMode()?1:0}
+function colLen(){if(!colMode())return 0;if(ph==1&&mulInfo().cols[0].kind=='w')return String(B).length;return 1}
 function subPrompt(){const s=S[k],x=colInfo().cols[sub.length];
  return (sub.length==0?`Віднімемо стовпчиком ${s.cur} − ${s.p}, цифри справа наліво. `:'')+`${x.e} − ${x.p} = ?`+(x.b?' (позичили десяток)':'')}
 function colCheck(v){
@@ -543,6 +543,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.72", date:"07.10.2026",
+      items:[
+        "Виправлено: коли цифра частки — 1, а дільник має кілька цифр (наприклад, 52), на комп’ютері після першої цифри добутку з’являлася помилка «Ще раз». Тепер добуток вводиться повністю (5, потім 2) і перевіряється після останньої цифри"
+      ]
+    },
     {
       version:"1.71", date:"07.10.2026",
       items:[
