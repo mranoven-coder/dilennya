@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.70 (06.10.2026)
+  Ділення стовпчиком — тренажер — v1.71 (07.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.70">
+<meta name="version" content="1.71">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.70"
+  "softwareVersion": "1.71"
 }
 </script>
 
@@ -163,7 +163,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.70</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.71</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -204,7 +204,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
   <p>Ні. Після першого відкриття тренажер працює й без інтернету, а ще його можна встановити як застосунок на телефон чи комп'ютер.</p>
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.70 · 06.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.71 · 07.10.2026</p>
 </section>
 </main>
 
@@ -386,7 +386,9 @@ function draw(){
   const showP=s.q>0&&(i<k||done||(i==k&&ph>=2));
   if(showP){const p=String(s.p);rows.push(' '.repeat(Math.max(0,e+1-p.length))+'<span class="pd ul">−'+p+'</span>')}
   if(inl&&i==k){
-   if(ph==1&&mulInfo().cols[0].kind=='l'){const tl=mul.join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
+   if(ph==1&&mulInfo().cols[0].kind=='w'){const L=String(B).length,cc=tv?cd(tv):'<span class="blink">·</span>';
+     rows.push(' '.repeat(Math.max(0,e+1-L))+'<span class="pd ul'+bad+'">−'+cc+'</span>')}
+   else if(ph==1&&mulInfo().cols[0].kind=='l'){const tl=mul.join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
      rows.push(' '.repeat(Math.max(0,e-1))+'<span class="pd ul'+bad+'">−'+tl+cc+(tl?'':' ')+'</span>')}
    else if(ph==1){const tl=mul.slice().reverse().join(''),cc=tv?cd(tv):'<span class="blink">·</span>';
     rows.push(' '.repeat(Math.max(0,e+1-tl.length-(tv?tv.length:1)))+'<span class="pd ul'+bad+'">−'+cc+tl+'</span>')}
@@ -419,6 +421,7 @@ function colInfo(){const s=S[k],c=String(s.cur),p=String(s.p).padStart(c.length,
  for(let j=0;j<c.length;j++){const ci=+c[c.length-1-j],pi=+p[c.length-1-j],v=ci-lent,b=v<pi?1:0,e=v+10*b;cols.push({e,p:pi,b,r:e-pi});lent=b}
  return {cols,nd:String(s.r).length}}
 function mulInfo(){const q=S[k].q,ds=String(B),cols=[];let c=0;
+ if(q===1)return {cols:[{ex:`1 × ${B}`,val:B,last:true,kind:'w',w:ds}],nd:1};
  for(let j=0;j<ds.length;j++){const d=+ds[ds.length-1-j],val=q*d+c,last=j==ds.length-1,ex=`${q} × ${d}${c?' + '+c:''}`;
   if(last&&val>=10&&ds.length==1){cols.push({ex,val,last,kind:'l',w:String(Math.floor(val/10))});cols.push({ex,val,last,kind:'r',w:String(val%10)})}
   else if(last&&val>=10){cols.push({ex,val,last,kind:'u',w:String(val%10)});cols.push({ex,val,last,kind:'t',w:String(Math.floor(val/10))})}
@@ -426,6 +429,7 @@ function mulInfo(){const q=S[k].q,ds=String(B),cols=[];let c=0;
   c=Math.floor(val/10)}
  return {cols,nd:cols.length}}
 function mulPrompt(){const x=mulInfo().cols[mul.length];
+ if(x.kind=='w')return `Множимо на 1 — число не змінюється. Пишемо ${B} як є, зліва направо: ${x.ex} = ?`;
  if(x.kind=='l')return `Помножимо ${x.ex}. Результат пишемо як є, зліва направо: ${x.ex} = ? (спершу цифра десятків)`;
  if(x.kind=='r')return `Далі пишемо цифру одиниць: ${x.ex} = ?`;
  if(x.kind=='t')return `Лівіше пишемо десятки: ${x.ex} = ${x.val}. Яка це цифра?`;
@@ -461,6 +465,7 @@ function hint(){
  const s=S[k];let h='';
  if(ph==0){h=Array.from({length:9},(_,i)=>`${B}×${i+1}=${B*(i+1)}`).join('  ·  ');h='Таблиця: '+h+'. Шукай число, що ≤ '+s.cur+', але найбільше.'}
  else if(ph==1&&colMode()&&mulInfo().cols[0].kind=='l'){const x=mulInfo().cols[mul.length];h=x.kind=='l'?`Помнож ${x.ex}. Результат пиши як є, зліва направо: спочатку цифра десятків.`:`Тепер цифра одиниць результату ${x.ex}.`}
+  else if(ph==1&&colMode()&&mulInfo().cols[0].kind=='w')h=`Будь-яке число, помножене на 1, не змінюється: 1 × ${B} = ${B}. Пиши ${B} зліва направо.`;
   else if(ph==1&&colMode())h=`Множ по цифрах справа. Пиши цифру одиниць, а десятки переноси в наступний стовпчик: ${mulInfo().cols[mul.length].ex}.`;
  else if(ph==1)h=`Рахуй по частинах: ${B} × ${s.q}.`;
  else if(colMode()){const x=colInfo().cols[sub.length];h=`Віднімай по цифрах справа. ${x.b?'Верхня цифра менша — позич десяток: ':''}${x.e} − ${x.p}.`}
@@ -538,6 +543,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.71", date:"07.10.2026",
+      items:[
+        "Якщо цифра частки — 1, множення 1 × дільник не робиться стовпчиком: дільник (наприклад, 38) записується як є, зліва направо, мигаюча крапка стоїть ліворуч, а риска — під числом; для інших цифр множення стовпчиком справа наліво не змінилось"
+      ]
+    },
     {
       version:"1.70", date:"06.10.2026",
       items:[
