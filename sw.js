@@ -10,14 +10,23 @@ const ASSETS = [
   './manifest.json',
   './icons/apple-touch-icon.png',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './images/dilennya-stovpchykom-740-na-4.webp',
+  './images/dilennya-stovpchykom-740-na-4.jpg',
+  './images/dilennya-z-ostacheyu-1695-na-16.webp',
+  './images/dilennya-z-ostacheyu-1695-na-16.jpg',
+  './images/dilennya-stovpchykom-5492656-na-52.webp',
+  './images/dilennya-stovpchykom-5492656-na-52.jpg'
 ];
 
 self.addEventListener('install', function(event){
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache){
-      return cache.addAll(ASSETS).catch(function(){ /* якщо якогось файлу нема — не критично */ });
+      // кожен файл кешується окремо: якщо якогось нема — решта все одно збережеться
+      return Promise.all(ASSETS.map(function(url){
+        return cache.add(url).catch(function(){ /* не критично */ });
+      }));
     })
   );
 });
