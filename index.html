@@ -1,5 +1,5 @@
 <!--
-  Ділення стовпчиком — тренажер — v1.73 (07.10.2026)
+  Ділення стовпчиком — тренажер — v1.74 (08.10.2026)
   Окремий проєкт, не пов'язаний з «Навчальним годинником».
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <meta name="description" content="Безкоштовний онлайн-тренажер письмового ділення в стовпчик, з остачею та без, для 3–4 класу. Покрокові підказки, без реєстрації, працює офлайн.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Anatolii Bondarenko">
-<meta name="version" content="1.73">
+<meta name="version" content="1.74">
 <link rel="canonical" href="https://mranoven-coder.github.io/dilennya/">
 
 <!-- Open Graph (Facebook, Telegram, Viber, WhatsApp тощо) -->
@@ -44,7 +44,7 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "UAH" },
   "audience": { "@type": "PeopleAudience", "suggestedMinAge": 7, "suggestedMaxAge": 11 },
   "author": { "@type": "Person", "name": "Anatolii Bondarenko" },
-  "softwareVersion": "1.73"
+  "softwareVersion": "1.74"
 }
 </script>
 
@@ -72,7 +72,10 @@
    "creator": {
     "@type": "Person",
     "name": "Anatolii Bondarenko"
-   }
+   },
+   "creditText": "Anatolii Bondarenko — «Ділення стовпчиком — тренажер»",
+   "copyrightNotice": "© 2026 Anatolii Bondarenko",
+   "acquireLicensePage": "https://github.com/mranoven-coder/dilennya"
   },
   {
    "@type": "ImageObject",
@@ -90,7 +93,10 @@
    "creator": {
     "@type": "Person",
     "name": "Anatolii Bondarenko"
-   }
+   },
+   "creditText": "Anatolii Bondarenko — «Ділення стовпчиком — тренажер»",
+   "copyrightNotice": "© 2026 Anatolii Bondarenko",
+   "acquireLicensePage": "https://github.com/mranoven-coder/dilennya"
   },
   {
    "@type": "ImageObject",
@@ -108,7 +114,10 @@
    "creator": {
     "@type": "Person",
     "name": "Anatolii Bondarenko"
-   }
+   },
+   "creditText": "Anatolii Bondarenko — «Ділення стовпчиком — тренажер»",
+   "copyrightNotice": "© 2026 Anatolii Bondarenko",
+   "acquireLicensePage": "https://github.com/mranoven-coder/dilennya"
   }
  ]
 }
@@ -234,7 +243,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 #kpKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
 #kpKeys button{padding:10px 0;font-size:1.25rem;border-radius:10px}
 </style></head><body><main>
-<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.73</button></div>
+<div class="title-row"><h1>➗ Ділення стовпчиком</h1><button type="button" class="version-badge" id="versionBadge">v1.74</button></div>
 
 <div class="row top-actions">
 <button type="button" class="donate-btn" id="donateBtn">☕ Підтримати проєкт</button>
@@ -316,7 +325,7 @@ body.inline #ansRow{position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;o
 <section class="about">
   <h3>Інші тренажери</h3>
   <p><a href="https://mranoven-coder.github.io/godynnyk/" style="color:var(--pr)">Навчальний годинник для дітей</a> — безкоштовний тренажер, який допомагає навчитися визначати час за аналоговим годинником.</p>
-  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.73 · 07.10.2026</p>
+  <p style="text-align:center;margin-top:16px">© 2026 Anatolii Bondarenko · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.uk" target="_blank" rel="noopener noreferrer" style="color:inherit">CC BY-NC-ND 4.0</a> · v1.74 · 08.10.2026</p>
 </section>
 </main>
 
@@ -655,6 +664,12 @@ if('serviceWorker' in navigator){
 
   // ---- Версії / «Що нового» ----
   var RELEASES = [
+    {
+      version:"1.74", date:"08.10.2026",
+      items:[
+        "Розмітка зображень для Google: додано поля авторства, повідомлення про авторські права та сторінку ліцензії (усунуто три попередження Search Console «Метадані зображення»)"
+      ]
+    },
     {
       version:"1.73", date:"07.10.2026",
       items:[
